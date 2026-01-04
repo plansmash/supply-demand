@@ -5,13 +5,20 @@ module.exports = {
   url: process.env.URL || "http://localhost:8080",
   language: "en",
   author: "Supply & Demand Beer and Pizza",
+  address: {
+    street: "420 Talbot Street",
+    city: "London",
+    province: "Ontario",
+    country: "Canada",
+    postalCode: ""
+  },
   contact: {
-    email: "info@supplyandemand.com",
-    phone: "(555) 123-4567"
+    email: "info@beerlab.com",
+    phone: ""
   },
   social: {
-    facebook: "",
-    instagram: "",
+    facebook: "https://www.facebook.com/SupplyDemandBrewery",
+    instagram: "https://www.instagram.com/supplydemandbrewery",
     twitter: ""
   }
 };

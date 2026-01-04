@@ -8,7 +8,7 @@
       <div class="col-md-4 mb-3 mb-md-0">
         <h3 class="h5">Contact</h3>
         <p>
-          <a href="tel:{{ site.contact.phone }}">{{ site.contact.phone }}</a><br>
+          {% if site.contact.phone %}<a href="tel:{{ site.contact.phone }}">{{ site.contact.phone }}</a><br>{% endif %}
           <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>
         </p>
       </div>

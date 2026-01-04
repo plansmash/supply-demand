@@ -8,10 +8,10 @@ permalink: /location/
   <div class="col-md-6 mb-4">
     <h2>Visit Us</h2>
     <address>
-      <strong>Supply & Demand Beer and Pizza</strong><br>
-      [Street Address]<br>
-      [City, State ZIP]<br>
-      <a href="tel:{{ site.contact.phone }}">{{ site.contact.phone }}</a><br>
+      <strong>{{ site.name }}</strong><br>
+      {{ site.address.street }}<br>
+      {{ site.address.city }}, {{ site.address.province }}, {{ site.address.country }}<br>
+      {% if site.contact.phone %}<a href="tel:{{ site.contact.phone }}">{{ site.contact.phone }}</a><br>{% endif %}
       <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>
     </address>
     
