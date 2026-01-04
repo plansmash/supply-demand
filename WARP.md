@@ -194,8 +194,12 @@ Once the site is live and stable, consider implementing a two-site deployment st
 6. Update CONTENT-GUIDE.md with staging workflow for content editors
 7. Share staging URL and build hook with content editors
 
+**Access Guidance (Recommended):**
+- Content editors: staging build hook only (to avoid accidental production deploys)
+- Site maintainer: both staging and production build hooks
+
 **Notes:**
 - The `staging` branch already exists in the repository
-- Both sites use the same Google Sheets (no need for duplicate sheets)
+- Both sites use the same Google Sheets to avoid data drift and duplicate content management
 - Keep staging synced with main periodically: `git checkout staging && git merge main && git push`
-- Staging site URL will be: `staging--supply-demand.netlify.app`
+- Staging site URL will be similar to: `staging--supply-demand.netlify.app` (exact URL depends on Netlify site name)
