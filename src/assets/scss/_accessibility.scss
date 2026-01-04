@@ -1,6 +1,6 @@
 // Skip to main content link
 .skip-link {
-  position: absolute;
+  position: fixed;
   top: -100px;
   left: 0;
   background: $secondary-color;
@@ -8,6 +8,7 @@
   padding: $spacer-sm $spacer;
   text-decoration: none;
   z-index: 9999;
+  transition: top 0.2s ease-in-out;
   
   &:focus {
     top: 0;
