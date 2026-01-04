@@ -1,0 +1,43 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-3 mb-md-0">
+        <h3 class="h5">{{ site.shortName }}</h3>
+        <p>{{ site.description }}</p>
+      </div>
+      <div class="col-md-4 mb-3 mb-md-0">
+        <h3 class="h5">Contact</h3>
+        <p>
+          <a href="tel:{{ site.contact.phone }}">{{ site.contact.phone }}</a><br>
+          <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>
+        </p>
+      </div>
+      <div class="col-md-4">
+        <h3 class="h5">Follow Us</h3>
+        <div class="social-links">
+          {% if site.social.facebook %}
+          <a href="{{ site.social.facebook }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <i class="fab fa-facebook" aria-hidden="true"></i>
+          </a>
+          {% endif %}
+          {% if site.social.instagram %}
+          <a href="{{ site.social.instagram }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <i class="fab fa-instagram" aria-hidden="true"></i>
+          </a>
+          {% endif %}
+          {% if site.social.twitter %}
+          <a href="{{ site.social.twitter }}" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+            <i class="fab fa-twitter" aria-hidden="true"></i>
+          </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <hr class="my-4">
+    <div class="text-center">
+      <p class="mb-0">
+        &copy; {% year %} {{ site.name }}. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>
