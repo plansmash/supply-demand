@@ -6,9 +6,7 @@ layout: base.njk
   <div class="row">
     <div class="col-lg-10 mx-auto">
       <h1 class="mb-4">{{ title }}</h1>
-      {% block content %}
-        {{ content | safe }}
-      {% endblock %}
+      {{ content | safe }}
     </div>
   </div>
 </div>

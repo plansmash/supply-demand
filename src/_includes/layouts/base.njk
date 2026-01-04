@@ -24,7 +24,7 @@
   {% include "components/header.njk" %}
   
   <main id="main-content">
-    {% block content %}{% endblock %}
+    {{ content | safe }}
   </main>
   
   {% include "components/footer.njk" %}
