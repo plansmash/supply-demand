@@ -104,7 +104,7 @@ All data source adapters must adhere to this contract:
 
 1. **Return shape**: Every adapter function must return `{ items, error, lastUpdated }`
    - `items`: Array of normalized objects matching template expectations
-   - `error`: String error message (or `null` if successful)
+   - `error`: String error message (or `null` if successful) - must be user-friendly for fallback UI
    - `lastUpdated`: ISO timestamp string
 
 2. **Never throw in production**: Adapters should catch errors internally and return the error shape above
@@ -116,12 +116,41 @@ All data source adapters must adhere to this contract:
    - Empty rows must be filtered out
    - Data types should be consistent (strings for text, numbers where appropriate)
 
+**Implementation Details:**
+- `dotenv` is initialized once in `.eleventy.js` (loaded before all data modules)
+- `DATA_SOURCE` input is normalized (trimmed and lowercased) for case-insensitive matching
+- Error messages are user-friendly and suitable for display in fallback UI
+- Unknown data sources default to `sheets` adapter with a console warning
+
 **Switching data sources:**
 To switch from Google Sheets to another source:
 1. Set `DATA_SOURCE` environment variable (e.g., `DATA_SOURCE=squarespace`)
 2. Implement the corresponding adapter in `src/_data/_sources/`
 3. Ensure adapter returns data in the canonical shape above
 4. **No template changes required** - data shape remains consistent
+
+### Template System
+
+**Eleventy Layout Inheritance:**
+- Templates use Eleventy's front matter-based layout system, NOT Nunjucks block inheritance
+- Content templates specify `layout:` in front matter (e.g., `layout: base.njk`)
+- Layouts use `{{ content | safe }}` to inject child template content
+- **Do NOT use `{% block content %}` in content templates** - this conflicts with Eleventy's layout system
+- Layouts can chain (e.g., `page.njk` extends `base.njk` via front matter)
+
+**Example:**
+```njk
+---
+layout: base.njk
+title: My Page
+---
+
+<div class="container">
+  <h1>Content goes here</h1>
+</div>
+```
+
+The layout (`base.njk`) uses `{{ content | safe }}` to inject the template content.
 
 ### Accessibility
 
