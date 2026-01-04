@@ -285,3 +285,33 @@ Once the site is live and stable, consider implementing a two-site deployment st
 - Both sites use the same Google Sheets to avoid data drift and duplicate content management
 - Keep staging synced with main periodically: `git checkout staging && git merge main && git push`
 - Staging site URL will be similar to: `staging--supply-demand.netlify.app` (exact URL depends on Netlify site name)
+
+### Archive Pages Using `active` Column (Not Yet Implemented)
+
+All Google Sheets (Beer, Menu, Events) include an `active` column. This can be used to implement archive pages:
+
+**Current Behavior:**
+- All items display regardless of `active` value
+- No filtering based on active/inactive status
+
+**Proposed Enhancement:**
+- Filter main pages to show only active items (`active` = "TRUE", "yes", "x", or "1")
+- Create dedicated archive pages showing inactive items
+- Add navigation links to archive pages
+
+**Archive Pages to Add:**
+- `/beer/archive/` - Past/seasonal beers that are no longer on tap
+- `/events/archive/` - Past events (useful for showing event history)
+- `/menu/archive/` - Retired menu items (seasonal pizzas, limited-time offerings)
+
+**Implementation Notes:**
+- Update templates to filter `items` by `active` column
+- Create new archive page templates (e.g., `beer-archive.njk`)
+- Archive pages should sort by `sort` column or alphabetically
+- Consider adding a toggle or link: "View Archive" / "View Current"
+- Update CONTENT-GUIDE.md to explain the `active` column workflow
+
+**Benefits:**
+- Content editors can hide past items by setting `active` to FALSE
+- Keeps main pages focused on current offerings
+- Preserves history for reference or bringing items back
