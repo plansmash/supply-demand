@@ -176,8 +176,18 @@ async function getHours() {
       hoursDisplay = 'Closed';
     }
 
+    // Format day display for special dates
+    let dayDisplay = row.day;
+    if (row.type === 'holiday' && row.day.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      // Parse YYYY-MM-DD date and format as "Dec 25"
+      const date = new Date(row.day + 'T00:00:00');
+      const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+                         'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      dayDisplay = `${monthNames[date.getMonth()]} ${date.getDate()}`;
+    }
+
     return {
-      day: row.day,
+      day: dayDisplay,
       hours: hoursDisplay,
       is_special: row.type === 'holiday',
       sort: parseInt(row.sort) || 0
