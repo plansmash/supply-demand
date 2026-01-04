@@ -87,3 +87,6 @@ See `.env.example` for setup; `CONTENT-GUIDE.md` documents column headers.
 - Keep dependencies minimal (currently 5 deps + Eleventy ecosystem)
 - Bootstrap/Font Awesome via CDN only
 - Avoid adding new npm packages unless essential
+
+## Future Enhancements
+See [WARP.md § Future Enhancements](../WARP.md#future-enhancements) for planned features and improvements.
