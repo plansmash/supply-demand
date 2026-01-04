@@ -7,7 +7,7 @@ permalink: /pizza/
 <div class="container">
   <h1 class="mb-4">Artisan Pizza</h1>
   
-  {% set pizzas = menu.items | selectattr('category', 'equalto', 'pizza') | list %}
+  {% set pizzas = menu.items | selectattr('category', 'equalto', 'pizza') | sort(false, false, 'item_name') | list %}
   
   {% if menu.error %}
     <div class="data-unavailable">

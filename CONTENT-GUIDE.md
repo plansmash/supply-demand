@@ -35,6 +35,9 @@ Required columns:
 - `description` - Brief description
 - `image_url` - Link to beer image (see Adding Images section)
 
+Optional columns:
+- `sort` - Custom sort order (e.g., "1", "2", "3"). If not provided, beers will be sorted alphabetically by name.
+
 Format availability columns (add "X" or "yes" if available in that format, leave empty if not):
 - `ontap` - Available on tap/draft
 - `can` - Available in cans

@@ -17,8 +17,9 @@ permalink: /events/
       <p class="mt-3">Please check back later or contact us for upcoming events.</p>
     </div>
   {% elif events.items.length > 0 %}
+    {% set sortedEvents = events.items | sort(false, false, 'title') %}
     <div class="row">
-      {% for event in events.items %}
+      {% for event in sortedEvents %}
         <div class="col-md-6 col-lg-4 mb-4">
           <div class="card h-100">
             {% if event.image_url %}

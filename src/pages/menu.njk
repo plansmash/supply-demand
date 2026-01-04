@@ -24,7 +24,7 @@ permalink: /menu/
         <section class="mb-5">
           <h2 class="h3 mb-3 text-capitalize border-bottom pb-2">{{ category }}</h2>
           <div class="row">
-            {% for item in menu.items | selectattr('category', 'equalto', category) %}
+            {% for item in menu.items | selectattr('category', 'equalto', category) | sort(false, false, 'item_name') %}
               <div class="col-md-6 col-lg-4 mb-3">
                 <div class="card h-100">
                   {% if item.image_url %}
