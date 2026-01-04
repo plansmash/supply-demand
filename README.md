@@ -251,7 +251,7 @@ Edit `src/_data/site.js` to update:
 
 ## Contributing
 
-This is a private project for Supply & Demand Beer and Pizza.
+This project is maintained for Supply & Demand Beer and Pizza.
 
 When making changes:
 1. Create a feature branch
