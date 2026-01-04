@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 // Data source adapters
 const sheets = require('./_sources/sheets');
 const squarespace = require('./_sources/squarespace');

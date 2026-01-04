@@ -1,3 +1,6 @@
+// Load environment variables first (before any data modules run)
+require('dotenv').config();
+
 const bundlerPlugin = require('@11ty/eleventy-plugin-bundle');
 const sass = require('sass');
 const path = require('path');
