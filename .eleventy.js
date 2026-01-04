@@ -19,6 +19,8 @@ module.exports = function(eleventyConfig) {
         return;
       }
 
+      // Remove front matter if present (Eleventy will have already processed it)
+      // The inputContent here is after front matter removal
       let result = sass.compileString(inputContent, {
         loadPaths: [parsed.dir || '.', 'src/assets/scss']
       });
