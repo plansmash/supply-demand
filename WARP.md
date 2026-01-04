@@ -135,3 +135,40 @@ Edit `src/_data/site.js` for site name, description, contact info, social links.
 - Images must have alt text
 - Use `.visually-hidden` (not `.sr-only`) for Bootstrap 5
 - Content updates require a rebuild to appear on the live site
+
+## Future Enhancements
+
+### Staging + Production Workflow (Not Yet Implemented)
+
+Once the site is live and stable, consider implementing a two-site deployment strategy:
+
+**Architecture:**
+- **Production Site** (`main` branch) - Live site with scheduled daily builds at 12am
+- **Staging Site** (`staging` branch) - Preview site that builds on-demand
+
+**Benefits:**
+- Content editors can preview changes before they go live
+- Reduces risk of mistakes appearing on production
+- Allows time for review and corrections
+
+**Workflow:**
+1. Editor makes changes to Google Sheets
+2. Editor triggers staging build via build hook
+3. Editor previews changes at staging URL
+4. Changes automatically go live at next scheduled build (12am)
+5. Or editor can trigger production build for urgent updates
+
+**Implementation Steps:**
+1. Create `staging` branch from `main`
+2. In Netlify, enable branch deploys for `staging`
+3. Create two build hooks (staging and production)
+4. Set up scheduled daily build for production (via Zapier, GitHub Actions, or Netlify Functions)
+5. Update README.md with deployment workflow
+6. Update CONTENT-GUIDE.md with staging workflow for content editors
+7. Share staging URL and build hook with content editors
+
+**Notes:**
+- The `staging` branch already exists in the repository
+- Both sites use the same Google Sheets (no need for duplicate sheets)
+- Keep staging synced with main periodically: `git checkout staging && git merge main && git push`
+- Staging site URL will be: `staging--supply-demand.netlify.app`
