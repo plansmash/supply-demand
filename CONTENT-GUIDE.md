@@ -33,8 +33,15 @@ Required columns:
 - `abv` - Alcohol by volume (e.g., "6.5")
 - `ibu` - International Bitterness Units (e.g., "45")
 - `description` - Brief description
-- `available` - Type "yes" if available, "no" if coming soon
 - `image_url` - Link to beer image (see Adding Images section)
+
+Format availability columns (add "X" or "yes" if available in that format, leave empty if not):
+- `ontap` - Available on tap/draft
+- `can` - Available in cans
+- `bottle` - Available in bottles
+- `togo` - Available to-go (growlers, crowlers, etc.)
+
+**Note:** A beer can be available in multiple formats. Just mark all applicable columns.
 
 #### Menu Sheet
 Required columns:

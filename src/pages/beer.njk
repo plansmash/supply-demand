@@ -5,7 +5,7 @@ permalink: /beer/
 ---
 
 <div class="container">
-  <h1 class="mb-4">On Tap</h1>
+  <h1 class="mb-4">Beers</h1>
   
   {% if beers.error %}
     <div class="data-unavailable">
@@ -34,13 +34,16 @@ permalink: /beer/
                 {% if beer.abv %}<span class="badge bg-primary">{{ beer.abv }}% ABV</span>{% endif %}
                 {% if beer.ibu %}<span class="badge bg-secondary">{{ beer.ibu }} IBU</span>{% endif %}
               </div>
-              {% if beer.available %}
-                <div class="mt-2">
-                  {% if beer.available == "yes" or beer.available == "true" %}
-                    <span class="badge bg-success">Available</span>
-                  {% else %}
-                    <span class="badge bg-warning text-dark">Coming Soon</span>
-                  {% endif %}
+              {% set hasFormat = beer.ontap or beer.can or beer.bottle or beer.togo %}
+              {% if hasFormat %}
+                <div class="mt-3">
+                  <div class="text-muted small mb-1">Available as:</div>
+                  <div class="d-flex flex-wrap gap-2">
+                    {% if beer.ontap and beer.ontap.trim() %}<span class="badge bg-success"><i class="fas fa-beer" aria-hidden="true"></i> On Tap</span>{% endif %}
+                    {% if beer.can and beer.can.trim() %}<span class="badge bg-info"><i class="fas fa-prescription-bottle" aria-hidden="true"></i> Cans</span>{% endif %}
+                    {% if beer.bottle and beer.bottle.trim() %}<span class="badge bg-info"><i class="fas fa-wine-bottle" aria-hidden="true"></i> Bottles</span>{% endif %}
+                    {% if beer.togo and beer.togo.trim() %}<span class="badge bg-warning text-dark"><i class="fas fa-shopping-bag" aria-hidden="true"></i> To Go</span>{% endif %}
+                  </div>
                 </div>
               {% endif %}
             </div>
