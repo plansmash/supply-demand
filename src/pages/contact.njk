@@ -44,45 +44,7 @@ permalink: /contact/
   
   <div class="col-md-6 mb-4">
     <h2>Hours</h2>
-    {% if hours.error %}
-      <div class="alert alert-warning" role="alert">
-        <p class="mb-0">{{ hours.error }}</p>
-      </div>
-    {% elif hours.items.length > 0 %}
-      {# Separate regular hours from special dates #}
-      {% set regularHours = [] %}
-      {% set specialDates = [] %}
-      {% for entry in hours.items %}
-        {% if entry.is_special %}
-          {% set specialDates = (specialDates.push(entry), specialDates) %}
-        {% else %}
-          {% set regularHours = (regularHours.push(entry), regularHours) %}
-        {% endif %}
-      {% endfor %}
-      
-      {# Display regular hours #}
-      {% if regularHours.length > 0 %}
-        <dl>
-          {% for entry in regularHours %}
-            <dt>{{ entry.day }}</dt>
-            <dd>{{ entry.hours }}</dd>
-          {% endfor %}
-        </dl>
-      {% endif %}
-      
-      {# Display special dates/holidays #}
-      {% if specialDates.length > 0 %}
-        <h4 class="h6 mt-3">Special Hours</h4>
-        <dl>
-          {% for entry in specialDates %}
-            <dt>{{ entry.day }}</dt>
-            <dd>{{ entry.hours }}</dd>
-          {% endfor %}
-        </dl>
-      {% endif %}
-    {% else %}
-      <p class="text-muted">Hours information coming soon.</p>
-    {% endif %}
+    {% include "components/hours.njk" %}
     
     <div class="mt-4">
       <a href="/location/" class="btn btn-primary">View Location & Map</a>
