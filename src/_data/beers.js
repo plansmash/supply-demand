@@ -1,59 +1,29 @@
 require('dotenv').config();
-const EleventyFetch = require('@11ty/eleventy-fetch');
-const Papa = require('papaparse');
 
+// Data source adapters
+const sheets = require('./_sources/sheets');
+const squarespace = require('./_sources/squarespace');
+
+/**
+ * Get beer list from configured data source
+ */
 module.exports = async function() {
-  const sheetUrl = process.env.SHEET_URL_BEERS;
+  const dataSource = process.env.DATA_SOURCE || 'sheets';
   
-  if (!sheetUrl) {
-    console.warn('⚠️  SHEET_URL_BEERS not configured. Using empty beer list.');
-    return {
-      items: [],
-      error: 'Data source not configured'
-    };
+  // Select adapter based on DATA_SOURCE
+  let adapter;
+  switch (dataSource) {
+    case 'sheets':
+      adapter = sheets;
+      break;
+    case 'squarespace':
+      adapter = squarespace;
+      break;
+    default:
+      console.error(`❌ Unknown DATA_SOURCE: ${dataSource}. Defaulting to sheets.`);
+      adapter = sheets;
   }
-
-  try {
-    // Fetch with caching (1 hour in dev, 1 day in production)
-    const csvData = await EleventyFetch(sheetUrl, {
-      duration: process.env.NODE_ENV === 'production' ? '1d' : '1h',
-      type: 'text',
-      fetchOptions: {
-        headers: {
-          'User-Agent': 'Supply-Demand-Website/1.0'
-        }
-      }
-    });
-
-    // Parse CSV data
-    const parsed = Papa.parse(csvData, {
-      header: true,
-      skipEmptyLines: true,
-      transformHeader: (header) => header.trim().toLowerCase().replace(/\s+/g, '_')
-    });
-
-    if (parsed.errors.length > 0) {
-      console.warn('⚠️  CSV parsing warnings:', parsed.errors);
-    }
-
-    // Filter out rows with no name (empty rows)
-    const beers = parsed.data.filter(row => row.name && row.name.trim());
-
-    console.log(`✅ Loaded ${beers.length} beers from Google Sheets`);
-
-    return {
-      items: beers,
-      error: null,
-      lastUpdated: new Date().toISOString()
-    };
-
-  } catch (error) {
-    console.error('❌ Failed to fetch beer data:', error.message);
-    
-    return {
-      items: [],
-      error: 'Unable to load beer list at this time',
-      lastUpdated: new Date().toISOString()
-    };
-  }
+  
+  // Delegate to adapter
+  return await adapter.getBeers();
 };
