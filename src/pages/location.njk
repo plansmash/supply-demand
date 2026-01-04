@@ -1,0 +1,65 @@
+---
+layout: layouts/page.njk
+title: Location & Hours
+permalink: /location/
+---
+
+<div class="row">
+  <div class="col-md-6 mb-4">
+    <h2>Visit Us</h2>
+    <address>
+      <strong>Supply & Demand Beer and Pizza</strong><br>
+      [Street Address]<br>
+      [City, State ZIP]<br>
+      <a href="tel:{{ site.contact.phone }}">{{ site.contact.phone }}</a><br>
+      <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>
+    </address>
+    
+    <h3>Hours</h3>
+    <table class="table table-sm">
+      <tbody>
+        <tr>
+          <td>Monday - Thursday</td>
+          <td>[Hours]</td>
+        </tr>
+        <tr>
+          <td>Friday - Saturday</td>
+          <td>[Hours]</td>
+        </tr>
+        <tr>
+          <td>Sunday</td>
+          <td>[Hours]</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <h3>Parking</h3>
+    <p>[Add parking information here]</p>
+  </div>
+  
+  <div class="col-md-6 mb-4">
+    <h2>Map</h2>
+    <div class="ratio ratio-4x3">
+      <iframe 
+        src="[Add Google Maps embed URL here]" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Supply & Demand Beer and Pizza location map">
+      </iframe>
+    </div>
+    <p class="mt-2 small text-muted">
+      <a href="[Add Google Maps link here]" target="_blank" rel="noopener noreferrer">
+        Open in Google Maps <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+      </a>
+    </p>
+  </div>
+</div>
+
+<div class="mt-4">
+  <p class="text-center">
+    <a href="/contact/" class="btn btn-primary">Contact Us</a>
+    <a href="/events/" class="btn btn-outline-primary">View Events</a>
+  </p>
+</div>

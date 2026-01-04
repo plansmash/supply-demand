@@ -1,0 +1,88 @@
+---
+layout: layouts/base.njk
+title: Menu
+permalink: /menu/
+---
+
+<div class="container">
+  <h1 class="mb-4">Full Menu</h1>
+  
+  {% if menu.error %}
+    <div class="data-unavailable">
+      <div class="icon">
+        <i class="fas fa-utensils" aria-hidden="true"></i>
+      </div>
+      <h2>Menu Unavailable</h2>
+      <p>{{ menu.error }}</p>
+      <p class="mt-3">Please check back later or contact us for our current menu.</p>
+    </div>
+  {% elif menu.items.length > 0 %}
+    {% set categories = menu.items | map(attribute='category') | unique | list %}
+    
+    {% for category in categories %}
+      {% if category %}
+        <section class="mb-5">
+          <h2 class="h3 mb-3 text-capitalize border-bottom pb-2">{{ category }}</h2>
+          <div class="row">
+            {% for item in menu.items | selectattr('category', 'equalto', category) %}
+              <div class="col-md-6 col-lg-4 mb-3">
+                <div class="card h-100">
+                  {% if item.image_url %}
+                    <img src="{{ item.image_url }}" class="card-img-top" alt="{{ item.item_name }}">
+                  {% endif %}
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                      <h3 class="card-title h6 mb-0">{{ item.item_name }}</h3>
+                      {% if item.price %}
+                        <span class="fw-bold text-primary">{{ item.price | formatPrice }}</span>
+                      {% endif %}
+                    </div>
+                    {% if item.description %}
+                      <p class="card-text small">{{ item.description }}</p>
+                    {% endif %}
+                    <div class="mt-2">
+                      {% if item.vegetarian == "yes" or item.vegetarian == "true" %}
+                        <span class="badge bg-success">
+                          <i class="fas fa-leaf" aria-hidden="true"></i>
+                          <span class="visually-hidden">Vegetarian</span>
+                          V
+                        </span>
+                      {% endif %}
+                      {% if item.vegan == "yes" or item.vegan == "true" %}
+                        <span class="badge bg-success">
+                          <i class="fas fa-seedling" aria-hidden="true"></i>
+                          <span class="visually-hidden">Vegan</span>
+                          VG
+                        </span>
+                      {% endif %}
+                      {% if item.gluten_free == "yes" or item.gluten_free == "true" %}
+                        <span class="badge bg-info">
+                          <span class="visually-hidden">Gluten Free</span>
+                          GF
+                        </span>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </section>
+      {% endif %}
+    {% endfor %}
+    
+    <div class="mt-4 p-3 bg-light rounded">
+      <p class="mb-0 small text-muted">
+        <strong>Dietary Key:</strong>
+        <span class="badge bg-success ms-2">V</span> Vegetarian
+        <span class="badge bg-success ms-2">VG</span> Vegan
+        <span class="badge bg-info ms-2">GF</span> Gluten Free
+      </p>
+    </div>
+  {% else %}
+    <div class="alert alert-info" role="alert">
+      <h2 class="h5">Menu coming soon</h2>
+      <p class="mb-0">We're currently updating our menu. Check back soon!</p>
+    </div>
+  {% endif %}
+</div>
