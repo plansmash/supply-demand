@@ -1,0 +1,27 @@
+{
+  "name": "supply-demand",
+  "version": "1.0.0",
+  "description": "Website for Supply & Demand Beer and Pizza",
+  "main": ".eleventy.js",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy",
+    "clean": "rm -rf _site .cache"
+  },
+  "keywords": [
+    "eleventy",
+    "static-site",
+    "brewery",
+    "pizzeria"
+  ],
+  "author": "Plansmash Media",
+  "license": "MIT",
+  "dependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "@11ty/eleventy-fetch": "^4.0.0",
+    "@11ty/eleventy-plugin-bundle": "^1.0.4",
+    "dotenv": "^16.4.1",
+    "papaparse": "^5.4.1",
+    "sass": "^1.70.0"
+  }
+}
