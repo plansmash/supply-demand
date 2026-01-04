@@ -1,0 +1,90 @@
+// Custom site styles
+
+// Typography
+body {
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $text-color;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-headings;
+  margin-bottom: $spacer;
+  line-height: 1.2;
+}
+
+// Layout
+.site-header {
+  background-color: $bg-alt;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.site-footer {
+  background-color: $secondary-color;
+  color: white;
+  margin-top: $spacer-xl;
+  padding: $spacer-lg 0;
+  
+  a {
+    color: rgba(255, 255, 255, 0.8);
+    
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+// Main content
+main {
+  min-height: 60vh;
+  padding-top: $spacer-lg;
+  padding-bottom: $spacer-lg;
+}
+
+// Data unavailable message
+.data-unavailable {
+  background-color: $bg-alt;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  padding: $spacer-lg;
+  text-align: center;
+  color: $text-light;
+  
+  .icon {
+    font-size: 2rem;
+    margin-bottom: $spacer;
+    opacity: 0.5;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+    margin-bottom: $spacer-sm;
+  }
+  
+  p {
+    margin-bottom: 0;
+  }
+}
+
+// Cards (for menu items, beers, events)
+.card {
+  transition: transform 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+// Images
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// Navigation
+.navbar-nav {
+  .nav-link {
+    font-weight: 500;
+  }
+}

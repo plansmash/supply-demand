@@ -1,0 +1,16 @@
+---
+permalink: /assets/css/main.css
+---
+
+// Import variables first
+@import 'variables';
+
+// Import accessibility styles
+@import 'accessibility';
+
+// Import custom styles
+@import 'custom';
+
+// Note: Bootstrap 5 and Font Awesome will be loaded via CDN in the base template
+// This approach keeps the build simple and leverages browser caching
+// If you want to customize Bootstrap, you can import it here instead
