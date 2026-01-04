@@ -26,7 +26,8 @@
   
   {# Display special dates/holidays #}
   {% if specialDates.length > 0 %}
-    <h4 class="h6 mt-3">Special Hours</h4>
+    {% set subHeadingLevel = specialHoursHeadingLevel | default("h4") %}
+    <{{ subHeadingLevel }} class="h6 mt-3">Special Hours</{{ subHeadingLevel }}>
     <dl>
       {% for entry in specialDates %}
         <dt>{{ entry.day }}</dt>
