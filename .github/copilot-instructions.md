@@ -73,6 +73,12 @@ See `.env.example` for setup; `CONTENT-GUIDE.md` documents column headers.
 - Prefer small, focused commits over large ones.
 - One logical change per commit whenever possible.
 - Write clear, descriptive commit messages (no emojis).
+- Avoid "mega commits" that mix structure, content, and styling.
+- **Always test with `npm run build` before committing** to catch build errors.
+- If unsure, commit more frequently rather than less.
+- Prefer small, focused commits over large ones.
+- One logical change per commit whenever possible.
+- Write clear, descriptive commit messages (no emojis).
 - Avoid “mega commits” that mix structure, content, and styling.
 - If unsure, commit more frequently rather than less.
 - When in doubt, choose the simpler, clearer solution and commit it separately.
