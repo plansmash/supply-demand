@@ -99,6 +99,23 @@ The data layer uses an adapter pattern to support multiple data sources:
 }
 ```
 
+**Adapter Contract:**
+All data source adapters must adhere to this contract:
+
+1. **Return shape**: Every adapter function must return `{ items, error, lastUpdated }`
+   - `items`: Array of normalized objects matching template expectations
+   - `error`: String error message (or `null` if successful)
+   - `lastUpdated`: ISO timestamp string
+
+2. **Never throw in production**: Adapters should catch errors internally and return the error shape above
+   - This ensures fallback UI displays instead of breaking the build
+   - Data modules wrap adapter calls in try/catch as a safety net
+
+3. **Normalize data**: Transform source data to match existing template expectations
+   - Column/field names must match what templates use
+   - Empty rows must be filtered out
+   - Data types should be consistent (strings for text, numbers where appropriate)
+
 **Switching data sources:**
 To switch from Google Sheets to another source:
 1. Set `DATA_SOURCE` environment variable (e.g., `DATA_SOURCE=squarespace`)

@@ -24,6 +24,15 @@ module.exports = async function() {
       adapter = sheets;
   }
   
-  // Delegate to adapter
-  return await adapter.getBeers();
+  // Delegate to adapter with error handling
+  try {
+    return await adapter.getBeers();
+  } catch (error) {
+    console.error(`❌ Adapter error (${dataSource}):`, error.message);
+    return {
+      items: [],
+      error: error.message || 'Data source error',
+      lastUpdated: new Date().toISOString()
+    };
+  }
 };
