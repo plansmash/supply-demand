@@ -66,9 +66,46 @@ Required columns:
 - `image_url` - Link to event image (see Adding Images section)
 - `link` - Optional link for more info (e.g., ticket sales)
 
+#### Hours Sheet
+Required columns:
+- `type` - "regular" for weekly hours, "holiday" for special dates
+- `day` - Day of week (e.g., "Monday") OR date (e.g., "2025-12-25")
+- `open` - Opening time in 24h format (e.g., "15:00"). Leave empty if closed.
+- `close` - Closing time in 24h format (e.g., "21:00"). Leave empty if closed.
+- `label` - Display text (e.g., "Closed", "Christmas Day – Closed"). Used when no open/close times.
+- `active` - Set to "1" to display, leave empty to hide
+- `sort` - Number to control display order (1-7 for weekdays, 100+ for holidays)
+
+**Examples:**
+
+Regular weekly hours (type = "regular"):
+| type | day | open | close | label | active | sort |
+|---------|-----------|-------|-------|--------|--------|------|
+| regular | Monday | | | Closed | 1 | 1 |
+| regular | Tuesday | | | Closed | 1 | 2 |
+| regular | Wednesday | 15:00 | 21:00 | | 1 | 3 |
+| regular | Thursday | 15:00 | 23:00 | | 1 | 4 |
+| regular | Friday | 15:00 | 00:00 | | 1 | 5 |
+| regular | Saturday | 15:00 | 00:00 | | 1 | 6 |
+| regular | Sunday | 14:00 | 20:00 | | 1 | 7 |
+
+Special dates/holidays (type = "holiday"):
+| type | day | open | close | label | active | sort |
+|---------|------------|-------|-------|-------------------------------|--------|------|
+| holiday | 2025-12-25 | | | Christmas Day – Closed | 1 | 100 |
+| holiday | 2025-12-31 | 15:00 | 18:00 | New Year's Eve (Early Close) | 1 | 101 |
+| holiday | 2026-01-01 | | | New Year's Day – Closed | 1 | 102 |
+
+**Notes:**
+- Times are in 24-hour format (15:00 = 3:00 PM, 23:00 = 11:00 PM)
+- Use "00:00" for midnight
+- The website automatically converts to 12-hour format with AM/PM
+- Use `label` for closed days or special messages
+- Holiday dates should use YYYY-MM-DD format
+
 ### Step 2: Publish Each Sheet as CSV
 
-For **each** of your three Google Sheets:
+For **each** of your four Google Sheets (Beer, Menu, Events, and Hours):
 
 1. Open the Google Sheet
 2. Click **File** → **Share** → **Publish to web**
@@ -81,7 +118,7 @@ For **each** of your three Google Sheets:
    ```
    https://docs.google.com/spreadsheets/d/e/2PACX-1v...long-id.../pub?output=csv
    ```
-7. Send these three URLs to your web developer to add to Netlify
+7. Send these four URLs to your web developer to add to Netlify
 
 **Important Notes:**
 - The sheet must remain published for the website to access it

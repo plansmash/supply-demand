@@ -137,8 +137,65 @@ async function getEvents() {
   };
 }
 
+/**
+ * Get business hours from Google Sheets
+ */
+async function getHours() {
+  const sheetUrl = process.env.SHEET_URL_HOURS;
+  const result = await fetchSheetData(sheetUrl, 'hours');
+
+  if (result.error) {
+    return {
+      items: [],
+      error: result.error,
+      lastUpdated: new Date().toISOString()
+    };
+  }
+
+  // Filter out rows with no day (empty rows) and inactive rows
+  const rawHours = result.data.filter(row => row.day && row.day.trim() && row.active);
+
+  // Transform to template-friendly format
+  const hours = rawHours.map(row => {
+    // Format hours display
+    let hoursDisplay;
+    if (row.label && row.label.trim()) {
+      // Use label if provided (e.g., "Closed", "Christmas Day – Closed")
+      hoursDisplay = row.label;
+    } else if (row.open && row.close) {
+      // Convert 24h to 12h format
+      const formatTime = (time) => {
+        const [hours, minutes] = time.split(':');
+        const h = parseInt(hours);
+        const period = h >= 12 ? 'PM' : 'AM';
+        const h12 = h === 0 ? 12 : h > 12 ? h - 12 : h;
+        return `${h12}:${minutes} ${period}`;
+      };
+      hoursDisplay = `${formatTime(row.open)}–${formatTime(row.close)}`;
+    } else {
+      hoursDisplay = 'Closed';
+    }
+
+    return {
+      day: row.day,
+      hours: hoursDisplay,
+      is_special: row.type === 'holiday',
+      sort: parseInt(row.sort) || 0
+    };
+  });
+
+  console.log(`✅ Loaded ${hours.length} hours entries from Google Sheets`);
+
+  return {
+    items: hours,
+    error: null,
+    lastUpdated: new Date().toISOString()
+  };
+}
+
 module.exports = {
   getBeers,
   getMenu,
-  getEvents
+  getEvents,
+  getHours
 };
