@@ -59,6 +59,14 @@ module.exports = function(eleventyConfig) {
     return isNaN(num) ? price : `$${num.toFixed(2)}`;
   });
 
+  eleventyConfig.addFilter('unique', function(array) {
+    return [...new Set(array)];
+  });
+
+  eleventyConfig.addFilter('map', function(array, attribute) {
+    return array.map(item => item[attribute]);
+  });
+
   // Shortcodes
   eleventyConfig.addShortcode('year', () => `${new Date().getFullYear()}`);
 
