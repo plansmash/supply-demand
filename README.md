@@ -17,7 +17,10 @@ Built with [Eleventy](https://www.11ty.dev/), a fast and flexible static site ge
 
 ## Prerequisites
 
-- Node.js 18+ and npm
+- Node.js 24.12.0 (LTS) or higher
+  - This project includes an `.nvmrc` file
+  - If using nvm: `nvm use` will automatically switch to the correct version
+- npm (comes with Node.js)
 - Git
 - Google account (for Sheets and Drive)
 
@@ -151,7 +154,7 @@ Content is managed through Google Sheets. See [CONTENT-GUIDE.md](CONTENT-GUIDE.m
 2. **Configure Build Settings**
    - Build command: `npm run build`
    - Publish directory: `_site`
-   - Node version: 18 or higher
+   - Node version: 24.12.0 (or set to read from `.nvmrc`)
 
 3. **Add Environment Variables**
    - Go to Site settings → Environment variables
