@@ -1,0 +1,26 @@
+# Node
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Eleventy
+_site/
+.cache/
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+
+# Build artifacts
+dist/
+*.log
