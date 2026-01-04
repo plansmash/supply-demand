@@ -34,31 +34,23 @@ permalink: /location/
       
       {# Display regular hours #}
       {% if regularHours.length > 0 %}
-        <table class="table table-sm">
-          <tbody>
-            {% for entry in regularHours %}
-              <tr>
-                <td class="fw-medium">{{ entry.day }}</td>
-                <td>{{ entry.hours }}</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+        <dl>
+          {% for entry in regularHours %}
+            <dt>{{ entry.day }}</dt>
+            <dd>{{ entry.hours }}</dd>
+          {% endfor %}
+        </dl>
       {% endif %}
       
       {# Display special dates/holidays #}
       {% if specialDates.length > 0 %}
         <h4 class="h6 mt-3">Special Hours</h4>
-        <table class="table table-sm">
-          <tbody>
-            {% for entry in specialDates %}
-              <tr>
-                <td class="fw-medium">{{ entry.day }}</td>
-                <td>{{ entry.hours }}</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+        <dl>
+          {% for entry in specialDates %}
+            <dt>{{ entry.day }}</dt>
+            <dd>{{ entry.hours }}</dd>
+          {% endfor %}
+        </dl>
       {% endif %}
     {% else %}
       <p class="text-muted">Hours information coming soon.</p>
