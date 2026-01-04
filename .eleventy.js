@@ -37,6 +37,7 @@ module.exports = function(eleventyConfig) {
   // Copy static assets
   eleventyConfig.addPassthroughCopy('src/assets/js');
   eleventyConfig.addPassthroughCopy('src/assets/images');
+  eleventyConfig.addPassthroughCopy('src/logo.jpg');
 
   // Watch SCSS files for changes
   eleventyConfig.addWatchTarget('src/assets/scss/');

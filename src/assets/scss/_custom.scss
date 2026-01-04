@@ -1,5 +1,19 @@
 // Custom site styles
 
+// Hero Section
+.hero-section {
+  .hero-image {
+    display: block;
+    max-height: 400px;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .hero-content {
+    border-bottom: 1px solid #dee2e6;
+  }
+}
+
 // Typography
 body {
   font-family: $font-family-base;
