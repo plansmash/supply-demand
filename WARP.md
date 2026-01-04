@@ -33,6 +33,12 @@ npm run clean            # Clean build artifacts and cache
 
 ### Environment Variables
 Required in `.env` (locally) and Netlify (production):
+
+**Data Source:**
+- `DATA_SOURCE` - Which data source to use (default: `sheets`)
+  - Options: `sheets`, `squarespace` (not yet implemented)
+
+**Google Sheets (when DATA_SOURCE=sheets):**
 - `SHEET_URL_BEERS` - Published CSV URL for beer list
 - `SHEET_URL_MENU` - Published CSV URL for menu
 - `SHEET_URL_EVENTS` - Published CSV URL for events
@@ -44,7 +50,14 @@ See `.env.example` and `CONTENT-GUIDE.md` for details.
 ### Project Structure
 ```
 src/
-├── _data/              # Data files (site.js, beers.js, menu.js, events.js)
+├── _data/              # Data files
+│   ├── _sources/       # Data source adapters
+│   │   ├── sheets.js   # Google Sheets adapter (active)
+│   │   └── squarespace.js  # Squarespace adapter (stub)
+│   ├── site.js         # Site metadata
+│   ├── beers.js        # Beer data (delegates to adapter)
+│   ├── menu.js         # Menu data (delegates to adapter)
+│   └── events.js       # Events data (delegates to adapter)
 ├── _includes/
 │   ├── layouts/        # Base layouts (base.njk, page.njk)
 │   └── components/     # Reusable components (header, footer, nav, skip-link)
@@ -57,20 +70,41 @@ src/
 
 ### Data Fetching
 
-**All data is fetched at build time** from Google Sheets using `@11ty/eleventy-fetch`:
+**Adapter Pattern:**
+The data layer uses an adapter pattern to support multiple data sources:
+
+- Data modules (`beers.js`, `menu.js`, `events.js`) delegate to source-specific adapters
+- The active adapter is selected via the `DATA_SOURCE` environment variable
+- Adapters are located in `src/_data/_sources/`
+- All adapters return data in the same normalized shape (see below)
+- **Templates are completely decoupled from the data source**
+
+**Current adapters:**
+- `sheets.js` - Google Sheets adapter (active, fully implemented)
+- `squarespace.js` - Squarespace adapter (stub, not yet implemented)
+
+**Google Sheets adapter** (when `DATA_SOURCE=sheets`):
+- Fetches from published Google Sheets CSVs via `@11ty/eleventy-fetch`
 - Cached for 1 hour in development, 1 day in production
 - Graceful error handling returns empty arrays with error messages
 - CSV parsing via `papaparse`
-- Column headers are normalized to lowercase with underscores
+- Column headers normalized to lowercase with underscores
 
-**Data structure returned:**
+**Data structure returned** (all adapters must use this shape):
 ```javascript
 {
   items: [],           // Array of data objects
-  error: null,         // Error message if fetch fails
+  error: null,         // Error message if fetch fails (or null if successful)
   lastUpdated: "..."   // ISO timestamp
 }
 ```
+
+**Switching data sources:**
+To switch from Google Sheets to another source:
+1. Set `DATA_SOURCE` environment variable (e.g., `DATA_SOURCE=squarespace`)
+2. Implement the corresponding adapter in `src/_data/_sources/`
+3. Ensure adapter returns data in the canonical shape above
+4. **No template changes required** - data shape remains consistent
 
 ### Accessibility
 
