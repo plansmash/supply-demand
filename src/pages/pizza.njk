@@ -7,7 +7,22 @@ permalink: /pizza/
 <div class="container">
   <h1 class="mb-4">Artisan Pizza</h1>
   
-  {% set pizzas = menu.items | selectattr('category', 'equalto', 'pizza') | sort(false, false, 'item_name') | list %}
+  <div class="mt-4 mb-4 p-3 bg-light rounded">
+    <p class="mb-0 small text-muted">
+      <strong>Dietary Key:</strong>
+      <span class="badge bg-success ms-2">V</span> Vegetarian
+      <span class="badge bg-success ms-2">VG</span> Vegan
+      <span class="badge bg-info ms-2">GF</span> Gluten Free
+    </p>
+  </div>
+  
+  {% set pizzas = [] %}
+  {% for item in menu.items %}
+    {% if item.category and item.category.toLowerCase() == 'pizza' %}
+      {% set pizzas = (pizzas.push(item), pizzas) %}
+    {% endif %}
+  {% endfor %}
+  {% set pizzas = pizzas | sort(false, false, 'item_name') %}
   
   {% if menu.error %}
     <div class="data-unavailable">
@@ -37,21 +52,22 @@ permalink: /pizza/
                 <p class="card-text">{{ item.description }}</p>
               {% endif %}
               <div class="mt-2">
-                {% if item.vegetarian == "yes" or item.vegetarian == "true" %}
+                {% set hasVeg = item.vegetarian and item.vegetarian != '' %}
+                {% set hasVegan = item.vegan and item.vegan != '' %}
+                {% set hasGF = item.gluten_free and item.gluten_free != '' %}
+                {% if hasVeg %}
                   <span class="badge bg-success">
-                    <i class="fas fa-leaf" aria-hidden="true"></i>
                     <span class="visually-hidden">Vegetarian</span>
-                    Vegetarian
+                    V
                   </span>
                 {% endif %}
-                {% if item.vegan == "yes" or item.vegan == "true" %}
+                {% if hasVegan %}
                   <span class="badge bg-success">
-                    <i class="fas fa-seedling" aria-hidden="true"></i>
                     <span class="visually-hidden">Vegan</span>
-                    Vegan
+                    VG
                   </span>
                 {% endif %}
-                {% if item.gluten_free == "yes" or item.gluten_free == "true" %}
+                {% if hasGF %}
                   <span class="badge bg-info">
                     <span class="visually-hidden">Gluten Free</span>
                     GF
