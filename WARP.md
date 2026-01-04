@@ -127,6 +127,33 @@ Edit `.eleventy.js` - existing filters:
 ### Updating site metadata
 Edit `src/_data/site.js` for site name, description, contact info, social links.
 
+## Data Contracts (Important)
+
+**Do not rename expected Google Sheets column headers** without updating:
+- `CONTENT-GUIDE.md` (so content editors know the correct column names)
+- The corresponding `src/_data/*.js` module (so data fetching works)
+- Any templates that reference those fields (so pages display correctly)
+
+**Prefer adding new columns over renaming existing ones.** This prevents breaking content editors' workflows.
+
+**Expected columns:**
+- **Beer List**: `name`, `style`, `abv`, `ibu`, `description`, `available`, `image_url`
+- **Menu**: `category`, `item_name`, `description`, `price`, `vegetarian`, `vegan`, `gluten_free`, `image_url`
+- **Events**: `title`, `date`, `time`, `description`, `image_url`, `link`
+
+## Reliability Requirement
+
+**Pages must never render blank due to missing or failed data fetches.**
+
+All templates that display Google Sheets data include fallback UI:
+- If data fetch fails (`error` is set): Show "Data Unavailable" message with user-friendly explanation
+- If no data exists (empty `items` array): Show "Coming soon" or "No items" message
+- If data loads successfully: Display the content normally
+
+This ensures the site remains functional even when Google Sheets are unavailable or not yet configured.
+
+See existing templates (`src/pages/beer.njk`, `menu.njk`, etc.) for fallback UI patterns.
+
 ## Important Notes
 
 - All commits should include `Co-Authored-By: Warp <agent@warp.dev>` when AI-assisted
