@@ -6,7 +6,9 @@ const squarespace = require('./_sources/squarespace');
  * Get beer list from configured data source
  */
 module.exports = async function() {
-  const dataSource = process.env.DATA_SOURCE || 'sheets';
+  // Normalize DATA_SOURCE input (trim and lowercase)
+  const rawSource = process.env.DATA_SOURCE || 'sheets';
+  const dataSource = rawSource.trim().toLowerCase();
   
   // Select adapter based on DATA_SOURCE
   let adapter;
@@ -18,7 +20,7 @@ module.exports = async function() {
       adapter = squarespace;
       break;
     default:
-      console.error(`❌ Unknown DATA_SOURCE: ${dataSource}. Defaulting to sheets.`);
+      console.error(`❌ Unknown DATA_SOURCE: "${rawSource}". Defaulting to sheets.`);
       adapter = sheets;
   }
   
@@ -27,9 +29,11 @@ module.exports = async function() {
     return await adapter.getBeers();
   } catch (error) {
     console.error(`❌ Adapter error (${dataSource}):`, error.message);
+    // Return user-friendly error message for fallback UI
+    const userFriendlyError = error.message || 'Unable to load beer list at this time';
     return {
       items: [],
-      error: error.message || 'Data source error',
+      error: userFriendlyError,
       lastUpdated: new Date().toISOString()
     };
   }
