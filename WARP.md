@@ -2,6 +2,8 @@
 
 This file provides guidance to WARP (warp.dev) when working with code in this repository.
 
+> **See also:** [.github/copilot-instructions.md](.github/copilot-instructions.md) for GitHub Copilot-specific project conventions.
+
 ## Project Overview
 
 This is the website for Supply & Demand Beer and Pizza, built with Eleventy (11ty) static site generator.
