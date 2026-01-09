@@ -148,11 +148,11 @@ main {
   margin: 20px 0;
   
   .icon {
-    // Icons are already hidden via aria-hidden in templates
-    // Using minimal visibility for minimal design
-    font-size: 0;
+    // Icons are marked as aria-hidden in templates
+    // Use visibility for better screen reader compatibility
+    visibility: hidden;
     height: 0;
-    overflow: hidden;
+    margin: 0;
   }
   
   h3 {
@@ -236,15 +236,10 @@ img {
 }
 
 // Override Bootstrap background colors and borders for minimal look
-.hero-content.bg-light {
-  background-color: transparent;
-  padding: 0;
-  border: none;
-}
-
 .bg-light {
   background-color: transparent;
   padding: 0;
+  border: none;
 }
 
 // Reset Bootstrap button and badge styling to look like links
