@@ -148,7 +148,11 @@ main {
   margin: 20px 0;
   
   .icon {
-    display: none; // Hide icons for minimal look
+    // Icons are already hidden via aria-hidden in templates
+    // Using minimal visibility for minimal design
+    font-size: 0;
+    height: 0;
+    overflow: hidden;
   }
   
   h3 {
@@ -231,17 +235,44 @@ img {
   padding-right: 8px;
 }
 
-// Remove Bootstrap background colors and borders
-.bg-light {
-  background-color: transparent !important;
-  padding: 0 !important;
+// Override Bootstrap background colors and borders for minimal look
+.hero-content.bg-light {
+  background-color: transparent;
+  padding: 0;
+  border: none;
 }
 
-.bg-primary, .btn-primary, .btn-outline-primary, .badge {
-  all: unset;
+.bg-light {
+  background-color: transparent;
+  padding: 0;
+}
+
+// Reset Bootstrap button and badge styling to look like links
+.btn-primary, .btn-outline-primary {
+  background-color: transparent;
+  border: none;
   color: #0000EE;
   text-decoration: underline;
-  cursor: pointer;
+  padding: 0;
+  font-weight: normal;
+  box-shadow: none;
+  
+  &:hover, &:focus, &:active {
+    background-color: transparent;
+    border: none;
+    color: #551A8B;
+    box-shadow: none;
+  }
+}
+
+.badge {
+  background-color: transparent;
+  border: none;
+  color: #0000EE;
+  text-decoration: underline;
+  padding: 0;
+  font-weight: normal;
+  font-size: inherit;
   
   &:hover {
     color: #551A8B;
