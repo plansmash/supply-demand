@@ -100,6 +100,15 @@ img {
 
 .navbar-brand {
 	color: white;
+	
+	.navbar-logo {
+		width: 20vw;
+		max-width: 100%;
+		height: auto;
+		border: none;
+		border-radius: 0;
+		box-shadow: none;
+	}
 }
 
 .navbar-nav {
