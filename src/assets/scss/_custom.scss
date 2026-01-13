@@ -28,7 +28,9 @@ h1, h2, h3, h4, h5, h6 {
 
 // Layout
 .site-header {
-  background-color: $bg-alt;
+  background-image: url('/assets/images/dark-wood-scaled.jpg');
+  background-position: bottom center;
+  background-size: cover;
   border-bottom: 1px solid #dee2e6;
 }
 
@@ -97,23 +99,23 @@ img {
 // Navigation
 
 .navbar-brand {
-	color: $primary-color-dark;
+	color: white;
 }
 
 .navbar-nav {
   .nav-link {
     font-weight: 500;
-    color: $text-color;
+    color: white;
     border-bottom: 2px solid transparent;
     
     &:hover,
     &:focus {
-      color: $primary-color-dark;
+      color: $primary-color;
     }
     
     &.active {
-      color: $primary-color-dark;
-      border-bottom-color: $primary-color-dark;
+      color: $primary-color;
+      border-bottom-color: $primary-color;
     }
   }
 }
