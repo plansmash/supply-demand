@@ -7,28 +7,28 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" href="/" {% if page.url == "/" %}aria-current="page"{% endif %}>Home</a>
+          <a class="nav-link {% if page.url == "/" %}active{% endif %}" href="/" {% if page.url == "/" %}aria-current="page"{% endif %}>Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/beer/" {% if page.url == "/beer/" %}aria-current="page"{% endif %}>Beer</a>
+          <a class="nav-link {% if page.url == "/beer/" %}active{% endif %}" href="/beer/" {% if page.url == "/beer/" %}aria-current="page"{% endif %}>Beer</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/pizza/" {% if page.url == "/pizza/" %}aria-current="page"{% endif %}>Pizza</a>
+          <a class="nav-link {% if page.url == "/pizza/" %}active{% endif %}" href="/pizza/" {% if page.url == "/pizza/" %}aria-current="page"{% endif %}>Pizza</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/menu/" {% if page.url == "/menu/" %}aria-current="page"{% endif %}>Menu</a>
+          <a class="nav-link {% if page.url == "/menu/" %}active{% endif %}" href="/menu/" {% if page.url == "/menu/" %}aria-current="page"{% endif %}>Menu</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/events/" {% if page.url == "/events/" %}aria-current="page"{% endif %}>Events</a>
+          <a class="nav-link {% if page.url == "/events/" %}active{% endif %}" href="/events/" {% if page.url == "/events/" %}aria-current="page"{% endif %}>Events</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/about/" {% if page.url == "/about/" %}aria-current="page"{% endif %}>About</a>
+          <a class="nav-link {% if page.url == "/about/" %}active{% endif %}" href="/about/" {% if page.url == "/about/" %}aria-current="page"{% endif %}>About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/location/" {% if page.url == "/location/" %}aria-current="page"{% endif %}>Location</a>
+          <a class="nav-link {% if page.url == "/location/" %}active{% endif %}" href="/location/" {% if page.url == "/location/" %}aria-current="page"{% endif %}>Location</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/contact/" {% if page.url == "/contact/" %}aria-current="page"{% endif %}>Contact</a>
+          <a class="nav-link {% if page.url == "/contact/" %}active{% endif %}" href="/contact/" {% if page.url == "/contact/" %}aria-current="page"{% endif %}>Contact</a>
         </li>
       </ul>
     </div>

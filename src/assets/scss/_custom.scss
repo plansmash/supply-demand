@@ -95,8 +95,25 @@ img {
 }
 
 // Navigation
+
+.navbar-brand {
+	color: $primary-color-dark;
+}
+
 .navbar-nav {
   .nav-link {
     font-weight: 500;
+    color: $text-color;
+    border-bottom: 2px solid transparent;
+    
+    &:hover,
+    &:focus {
+      color: $primary-color-dark;
+    }
+    
+    &.active {
+      color: $primary-color-dark;
+      border-bottom-color: $primary-color-dark;
+    }
   }
 }
