@@ -39,8 +39,11 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('src/assets/images');
   eleventyConfig.addPassthroughCopy('src/logo.jpg');
 
-  // Watch SCSS files for changes
-  eleventyConfig.addWatchTarget('src/assets/scss/');
+  // Watch SCSS files for changes (including partials)
+  eleventyConfig.addWatchTarget('src/assets/scss/**/*.scss');
+  
+  // Set watch to trigger on SCSS changes
+  eleventyConfig.setWatchThrottleWaitTime(100);
 
   // Filters
   eleventyConfig.addFilter('formatDate', function(date) {
