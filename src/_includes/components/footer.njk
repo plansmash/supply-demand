@@ -11,36 +11,51 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4 mb-3 mb-md-0">
-        <h3 class="h5">{{ site.shortName }}</h3>
-        <p>{{ site.description }}</p>
+      <div class="col-md-4 mb-3 mb-md-0 pe-md-4">
+        <h2 class="h3" id="footer-info">Information</h2>
+        <nav aria-labelledby="footer-info">
+          <ul class="list-unstyled">
+            <li><a href="/accessibility/">Accessibility</a></li>
+            <li><a href="/code-of-conduct/">Code of Conduct</a></li>
+            <li><a href="/faq/">FAQ</a></li>
+            <li><a href="/privacy-policy/">Privacy Policy</a></li>
+          </ul>
+        </nav>
       </div>
-      <div class="col-md-4 mb-3 mb-md-0">
-        <h3 class="h5">Contact</h3>
-        <p>
-          {% if site.contact.phone %}<a href="tel:{{ site.contact.phone }}">{{ site.contact.phone }}</a><br>{% endif %}
-          <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>
-        </p>
+      <div class="col-md-4 mb-3 mb-md-0 pe-md-4">
+        <h2 class="h3">Supply & Demand</h2>
+        <address>
+			{{ site.address.street }}<br />
+			{{ site.address.city }}, {{ site.address.province }}<br /> 
+			{{ site.address.country }}<br />
+			{{ site.address.postalCode }}
+        </address>
       </div>
-      <div class="col-md-4">
-        <h3 class="h5">Follow Us</h3>
-        <div class="social-links">
+      <div class="col-md-4 mb-3 mb-md-0 pe-md-4">
+        <h2 class="h3">Follow Us</h2>
+        <ul class="social-links list-unstyled">
           {% if site.social.facebook %}
-          <a href="{{ site.social.facebook }}" aria-label="Facebook">
-            <i class="fab fa-facebook" aria-hidden="true"></i>
-          </a>
+          <li>
+            <a href="{{ site.social.facebook }}" aria-label="Facebook">
+              <i class="fab fa-facebook" aria-hidden="true"></i>
+            </a>
+          </li>
           {% endif %}
           {% if site.social.instagram %}
-          <a href="{{ site.social.instagram }}" aria-label="Instagram">
-            <i class="fab fa-instagram" aria-hidden="true"></i>
-          </a>
+          <li>
+            <a href="{{ site.social.instagram }}" aria-label="Instagram">
+              <i class="fab fa-instagram" aria-hidden="true"></i>
+            </a>
+          </li>
           {% endif %}
-          {% if site.social.twitter %}
-          <a href="{{ site.social.twitter }}" aria-label="Twitter">
-            <i class="fab fa-twitter" aria-hidden="true"></i>
-          </a>
+          {% if site.contact.email %}
+          <li>
+            <a href="mailto:{{ site.contact.email }}" aria-label="Email">
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+            </a>
+          </li>
           {% endif %}
-        </div>
+        </ul>
       </div>
     </div>
     <hr class="my-4">

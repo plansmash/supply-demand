@@ -10,15 +10,14 @@ module.exports = {
     city: "London",
     province: "Ontario",
     country: "Canada",
-    postalCode: ""
+    postalCode: "N6A 2S6"
   },
   contact: {
-    email: "info@beerlab.com",
+    email: "info@sdbeerandpizza.com",
     phone: ""
   },
   social: {
     facebook: "https://www.facebook.com/SupplyDemandBrewery",
-    instagram: "https://www.instagram.com/supplydemandbrewery",
-    twitter: ""
+    instagram: "https://www.instagram.com/supplydemandbrewery"
   }
 };

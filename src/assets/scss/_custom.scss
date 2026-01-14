@@ -171,11 +171,41 @@ a {
     margin-bottom: $spacer;
   }
   
+  h2 {
+    padding-bottom: $spacer-sm;
+    border-bottom: 2px solid $secondary-color;
+    margin-bottom: $spacer;
+  }
+  
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    
+    li {
+      list-style: none;
+    }
+    
+    a {
+      font-size: 2rem;
+      display: inline-block;
+      transition: all 0.2s ease;
+      
+      &:hover,
+      &:focus {
+        color: $secondary-color;
+        transform: scale(1.1);
+        text-decoration: none;
+      }
+    }
+  }
+  
   a {
     color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
     
     &:hover {
       color: white;
+      text-decoration: underline;
     }
   }
 }
