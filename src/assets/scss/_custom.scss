@@ -12,6 +12,55 @@
   }
 }
 
+// Homepage Hero Section
+.hero-section-home {
+  min-height: 70vh;
+  background-image: url('/assets/images/sd-building-grunge.jpg');
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  
+  .hero-overlay {
+    width: 100%;
+    padding: $spacer-xl 0;
+  }
+  
+  .hero-logo {
+    max-width: 50%;
+    height: auto;
+    margin-bottom: $spacer-lg;
+    
+    @media (max-width: 991px) {
+      max-width: 70%;
+    }
+  }
+  
+  .hero-text {
+    color: white;
+    
+    p {
+      font-family: 'Barlow', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-shadow: 5px 5px 5px #000000;
+      margin-bottom: 0.5rem;
+    }
+    
+    .hero-tagline {
+      margin-bottom: 0.25rem;
+    }
+    
+    .hero-location {
+      margin-bottom: 0;
+    }
+  }
+}
+
 // Typography
 body {
   font-family: $font-family-base;
@@ -52,8 +101,6 @@ h1, h2, h3, h4, h5, h6 {
 // Main content
 main {
   min-height: 60vh;
-  padding-top: $spacer-lg;
-  padding-bottom: $spacer-lg;
 }
 
 // Data unavailable message
