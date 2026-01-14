@@ -1,12 +1,90 @@
 ---
 layout: base.njk
-title: Menu
+title: Menus
 permalink: /menu/
 ---
 
 <div class="container">
-  <h1 class="mb-4">Full Menu</h1>
+  <h1 class="mb-4">{{ title }}</h1>
   
+  {# Table of Contents #}
+  <nav class="mb-5" aria-labelledby="menuSections">
+    <h2 class="visually-hidden" id="menuSections">Menu sections</h2>
+    <ul class="list-unstyled d-flex flex-wrap gap-3 mb-0">
+      <li><a href="#beers">Beers</a></li>
+      {% if menu.items.length > 0 %}
+        {% set categories = [] %}
+        {% for item in menu.items %}
+          {% if item.category and item.category not in categories %}
+            {% set categories = (categories.push(item.category), categories) %}
+          {% endif %}
+        {% endfor %}
+        {% for category in categories %}
+          {% if category %}
+            <li><a href="#{{ category | lower | replace(' ', '-') }}">{{ category }}</a></li>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </ul>
+  </nav>
+  
+  {# Beer Section #}
+  <section id="beers" class="mb-5">
+    <h2 class="h3 mb-3 border-bottom pb-2">Beers</h2>
+    {% if beers.error %}
+      <div class="alert alert-warning" role="alert">
+        <p class="mb-0">{{ beers.error }}</p>
+      </div>
+    {% elif beers.items.length > 0 %}
+      <div class="row">
+        {% for beer in beers.items | sort(false, false, 'name') %}
+          <div class="col-md-6 col-lg-4 mb-3">
+            <div class="card h-100">
+              {% if beer.image_url %}
+                <img src="{{ beer.image_url }}" class="card-img-top" alt="{{ beer.name }}">
+              {% endif %}
+              <div class="card-body">
+                <h3 class="card-title h6">{{ beer.name }}</h3>
+                {% if beer.style %}
+                  <p class="text-muted small mb-2">{{ beer.style }}</p>
+                {% endif %}
+                {% if beer.description %}
+                  <p class="card-text small">{{ beer.description }}</p>
+                {% endif %}
+                <div class="mt-2">
+                  {% if beer.abv %}
+                    <span class="badge bg-primary me-1">ABV: {{ beer.abv }}%</span>
+                  {% endif %}
+                  {% if beer.ibu %}
+                    <span class="badge bg-secondary">IBU: {{ beer.ibu }}</span>
+                  {% endif %}
+                </div>
+                {% if beer.ontap or beer.can or beer.bottle %}
+                  <div class="mt-2">
+                    {% if beer.ontap and beer.ontap != '' %}
+                      <span class="badge bg-success me-1">On Tap</span>
+                    {% endif %}
+                    {% if beer.can and beer.can != '' %}
+                      <span class="badge bg-info me-1">Cans</span>
+                    {% endif %}
+                    {% if beer.bottle and beer.bottle != '' %}
+                      <span class="badge bg-info">Bottles</span>
+                    {% endif %}
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="alert alert-info" role="alert">
+        <p class="mb-0">Beer list coming soon.</p>
+      </div>
+    {% endif %}
+  </section>
+  
+  {# Food Menu Section #}
   <div class="mt-4 mb-4 p-3 bg-light rounded">
     <p class="mb-0 small text-muted">
       <strong>Dietary Key:</strong>
@@ -36,7 +114,7 @@ permalink: /menu/
     
     {% for category in categories %}
       {% if category %}
-        <section class="mb-5">
+        <section id="{{ category | lower | replace(' ', '-') }}" class="mb-5">
           <h2 class="h3 mb-3 text-capitalize border-bottom pb-2">{{ category }}</h2>
           <div class="row">
             {% for item in menu.items | sort(false, false, 'item_name') %}
