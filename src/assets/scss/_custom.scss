@@ -58,6 +58,34 @@
       margin-bottom: 0;
     }
   }
+  
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    
+    .hero-btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background-color: #a5885d;
+      color: white;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-family: 'Barlow', sans-serif;
+      font-weight: 700;
+      border-radius: 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+      
+      &:hover,
+      &:focus {
+        background-color: white;
+        color: black;
+        text-shadow: none;
+      }
+    }
+  }
 }
 
 // Typography
