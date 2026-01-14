@@ -92,14 +92,59 @@
 body {
   font-family: $font-family-base;
   font-size: $font-size-base;
+  font-weight: 400;
   line-height: $line-height-base;
   color: $text-color;
+  background-color: $bg-color;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-family-headings;
+  font-weight: 700;
   margin-bottom: $spacer;
-  line-height: 1.2;
+  line-height: 1.3;
+}
+
+// Links
+a {
+  color: $primary-color-dark;
+  text-decoration: underline;
+  transition: all 0.2s ease;
+  
+  &:hover,
+  &:focus {
+    color: $secondary-color;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+  }
+  
+  &:focus {
+    outline: 2px solid $primary-color-dark;
+    outline-offset: 2px;
+  }
+}
+
+// Content pages
+.page-content {
+  padding-top: $spacer-xl;
+  
+  h1 {
+    margin-bottom: $spacer-lg;
+    margin-top: 0;
+  }
+  
+  h2, h3, h4, h5, h6 {
+    margin-top: $spacer-xl;
+  }
+  
+  p {
+    max-width: 75ch;
+    margin-bottom: $spacer-lg;
+  }
+  
+  li {
+    max-width: 75ch;
+  }
 }
 
 // Layout
@@ -214,15 +259,16 @@ img {
     color: white;
     text-transform: uppercase;
     border-bottom: 2px solid transparent;
+    text-decoration: none;
     
     &:hover,
     &:focus {
-      color: $primary-color;
+      color: $primary-color-dark;
     }
     
     &.active {
-      color: $primary-color;
-      border-bottom-color: $primary-color;
+      color: $primary-color-dark;
+      border-bottom-color: $primary-color-dark;
     }
   }
   
