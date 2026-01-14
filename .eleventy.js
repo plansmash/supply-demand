@@ -42,7 +42,15 @@ module.exports = function(eleventyConfig) {
   // Watch SCSS partials and trigger rebuild of main.scss
   eleventyConfig.addWatchTarget('src/assets/scss/**/*.scss');
   eleventyConfig.setServerOptions({
-    watch: ['src/assets/scss/**/*.scss']
+    watch: ['src/assets/scss/**/*.scss'],
+    // Force browser reload on CSS changes
+    liveReload: true,
+    // Don't cache static files
+    headers: {
+      '*.css': {
+        'Cache-Control': 'no-cache'
+      }
+    }
   });
   
   // Set watch to trigger on SCSS changes
