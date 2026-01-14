@@ -111,10 +111,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .site-footer {
-  background-color: $secondary-color;
+  background-image: url('/assets/images/dark-wood-scaled.jpg');
+  background-position: bottom center;
+  background-size: cover;
   color: white;
   margin-top: $spacer-xl;
   padding: $spacer-lg 0;
+  
+  .footer-image {
+    height: 29vh;
+    width: auto;
+    object-fit: contain;
+    object-position: center center;
+    margin-bottom: $spacer;
+  }
   
   a {
     color: rgba(255, 255, 255, 0.8);
