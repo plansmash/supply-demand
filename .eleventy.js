@@ -39,8 +39,11 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy('src/assets/images');
   eleventyConfig.addPassthroughCopy('src/logo.jpg');
 
-  // Watch SCSS files for changes (including partials)
+  // Watch SCSS partials and trigger rebuild of main.scss
   eleventyConfig.addWatchTarget('src/assets/scss/**/*.scss');
+  eleventyConfig.setServerOptions({
+    watch: ['src/assets/scss/**/*.scss']
+  });
   
   // Set watch to trigger on SCSS changes
   eleventyConfig.setWatchThrottleWaitTime(100);
