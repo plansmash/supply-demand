@@ -65,6 +65,17 @@ module.exports = function(eleventyConfig) {
     return array.map(item => item[attribute]);
   });
 
+  // Event image path filter - converts filename to full path
+  eleventyConfig.addFilter('eventImage', function(filename) {
+    if (!filename) return '';
+    // If it's already a full URL (http:// or https://), return as-is
+    if (filename.startsWith('http://') || filename.startsWith('https://')) {
+      return filename;
+    }
+    // Otherwise, prepend the local events images path
+    return `/assets/images/events/${filename}`;
+  });
+
   // Shortcodes
   eleventyConfig.addShortcode('year', () => `${new Date().getFullYear()}`);
 

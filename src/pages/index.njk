@@ -27,3 +27,18 @@ permalink: /
     </div>
   </div>
 </div>
+
+{# Events Section #}
+{% if events.items.length > 0 %}
+  <section class="container my-5">
+    <h2 class="mb-4">Upcoming Events</h2>
+    
+    {% set limit = 3 %}
+    {% set showRecurring = false %}
+    {% include "components/events-list.njk" %}
+    
+    <div class="text-center mt-4">
+      <a href="/events/" class="hero-btn">View All Events</a>
+    </div>
+  </section>
+{% endif %}

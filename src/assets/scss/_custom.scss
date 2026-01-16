@@ -64,28 +64,36 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
-    
-    .hero-btn {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background-color: #a5885d;
-      color: white;
-      text-decoration: none;
-      text-transform: uppercase;
-      font-family: 'Barlow', sans-serif;
-      font-weight: 700;
-      border-radius: 0;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      transition: all 0.3s ease;
-      
-      &:hover,
-      &:focus {
-        background-color: white;
-        color: black;
-        text-shadow: none;
-      }
-    }
   }
+}
+
+// Hero button styles (used in hero and events)
+.hero-btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #a5885d;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: 'Barlow', sans-serif;
+  font-weight: 700;
+  border-radius: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+  
+  &:hover,
+  &:focus {
+    background-color: white;
+    color: black;
+    text-shadow: none;
+    outline: 2px solid #a5885d;
+    outline-offset: 2px;
+  }
+}
+
+.hero-btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
 }
 
 // Typography
@@ -246,6 +254,21 @@ main {
   
   &:hover {
     transform: translateY(-2px);
+  }
+}
+
+// Event cards and posters
+.event-card {
+  .event-poster {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 3 / 4; // Standard poster ratio (portrait)
+    
+    @supports not (aspect-ratio: 3 / 4) {
+      // Fallback for older browsers
+      min-height: 300px;
+    }
   }
 }
 
