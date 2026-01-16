@@ -309,13 +309,13 @@
     <table class="calendar-table" role="grid" aria-label="Events calendar">
       <thead>
         <tr>
-          <th scope="col" abbr="Sunday">Sun</th>
-          <th scope="col" abbr="Monday">Mon</th>
-          <th scope="col" abbr="Tuesday">Tue</th>
-          <th scope="col" abbr="Wednesday">Wed</th>
-          <th scope="col" abbr="Thursday">Thu</th>
-          <th scope="col" abbr="Friday">Fri</th>
-          <th scope="col" abbr="Saturday">Sat</th>
+          <th scope="col"><span aria-hidden="true">Sun</span><span class="visually-hidden">Sunday</span></th>
+          <th scope="col"><span aria-hidden="true">Mon</span><span class="visually-hidden">Monday</span></th>
+          <th scope="col"><span aria-hidden="true">Tue</span><span class="visually-hidden">Tuesday</span></th>
+          <th scope="col"><span aria-hidden="true">Wed</span><span class="visually-hidden">Wednesday</span></th>
+          <th scope="col"><span aria-hidden="true">Thu</span><span class="visually-hidden">Thursday</span></th>
+          <th scope="col"><span aria-hidden="true">Fri</span><span class="visually-hidden">Friday</span></th>
+          <th scope="col"><span aria-hidden="true">Sat</span><span class="visually-hidden">Saturday</span></th>
         </tr>
       </thead>
       <tbody>
@@ -716,12 +716,12 @@
             <div class="event-actions">
               {% if event.ticket_link %}
                 <a href="{{ event.ticket_link }}" class="hero-btn hero-btn-sm">
-                  <i class="fas fa-ticket-alt" aria-hidden="true"></i> Tickets
+                  <i class="fas fa-ticket-alt" aria-hidden="true"></i> Tickets<span class="visually-hidden"> - {{ event.title }}</span>
                 </a>
               {% endif %}
               {% if event.instagram_link %}
                 <a href="{{ event.instagram_link }}" class="hero-btn hero-btn-sm">
-                  <i class="fab fa-instagram" aria-hidden="true"></i> Instagram
+                  <i class="fab fa-instagram" aria-hidden="true"></i> Instagram<span class="visually-hidden"> - {{ event.title }}</span>
                 </a>
               {% endif %}
             </div>
