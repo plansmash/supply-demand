@@ -59,12 +59,45 @@ Required columns:
 
 #### Events Sheet
 Required columns:
-- `title` - Event name
-- `date` - Event date (e.g., "2026-03-15" or "March 15, 2026")
-- `time` - Event time (e.g., "7:00 PM")
-- `description` - Event description
-- `image_url` - Link to event image (see Adding Images section)
-- `link` - Optional link for more info (e.g., ticket sales)
+- `title` - Event name (e.g., "Trivia Night - Every Monday", "Grand Re-Opening Party")
+- `date` - Event date in YYYY-MM-DD format (e.g., "2026-06-15"). **Leave empty for recurring events** (like weekly trivia)
+- `time_start` - Event start time (e.g., "19:00" for 7:00 PM, "18:30" for 6:30 PM)
+- `time_end` - Optional event end time (e.g., "22:00" for 10:00 PM). Leave empty if no end time
+- `price` - Optional ticket price or cost (e.g., "10" for $10.00, "Free", "$5 cover")
+- `description` - Brief description of the event (includes all relevant information from the poster)
+- `ticket_link` - Optional URL for tickets (e.g., Eventbrite link, ticket sales page)
+- `instagram_link` - Optional Instagram post URL for the event
+- `image_url` - Just the filename of the poster image (e.g., "grand-reopening.jpg")
+- `image_alt` - **Leave this blank** - images are decorative since all information is included in the description
+- `active` - Set to "TRUE" to show on site, "FALSE" to hide
+- `sort` - Optional number to control display order (lower numbers appear first). If empty, events display in table order
+
+**Event Types:**
+
+**Recurring Events (Weekly/Regular):**
+- Leave `date` column **empty**
+- Include pattern in `title` (e.g., "Trivia Night - Every Monday", "Wax Museum - Every Thursday")
+- These events always display first in the "Regular Events" section
+- Leave `sort` empty to display in table order, or use numbers to control order
+
+**One-Time Events (Specific Date):**
+- Fill in `date` column (e.g., "2026-06-15")
+- These events display in the "Upcoming Events" section
+- Automatically sorted by date (soonest first)
+- Past events are automatically hidden
+- Leave `sort` empty for automatic date sorting, or use numbers to override
+
+**Examples:**
+
+Recurring event:
+| title | date | time_start | time_end | price | description | ticket_link | instagram_link | image_url | image_alt | active | sort |
+|---------------------------|--------|------------|----------|-------|-------------------------------|------|---------------|----------------|-----------|--------|------|
+| Trivia Night - Every Monday | | 19:00 | 22:00 | Free | Weekly trivia with prizes | | https://instagram.com/p/... | trivia-night.jpg | | TRUE | |
+
+One-time event:
+| title | date | time_start | time_end | price | description | ticket_link | instagram_link | image_url | image_alt | active | sort |
+|---------------------|------------|------------|----------|-------|--------------------------------|------|---------------|----------------------|-----------|--------|------|
+| Grand Re-Opening Party | 2026-06-15 | 17:00 | | Free | Celebrate with live music! | https://eventbrite.com/... | https://instagram.com/p/... | grand-reopening.jpg | | TRUE | |
 
 #### Hours Sheet
 Required columns:
@@ -163,14 +196,46 @@ For **each** of your four Google Sheets (Beer, Menu, Events, and Hours):
 4. Save
 5. Trigger a rebuild
 
-**Example Row:**
-| title | date | time | description | image_url | link |
-|-------|------|------|-------------|-----------|------|
-| Trivia Night | 2026-03-15 | 7:00 PM | Weekly trivia with prizes | https://drive.google.com/uc?export=view&id=DEF456 | |
+**Example Row (Recurring Event):**
+| title | date | time_start | time_end | price | description | image_url | ticket_link | instagram_link | active | sort |
+|---------------------------|------|------------|----------|-------|------------------------|------------------|------|---------------|--------|------|
+| Trivia Night - Every Monday | | 19:00 | 22:00 | Free | Weekly trivia with prizes | trivia-night.jpg | | https://instagram.com/p/... | TRUE | |
+
+**Example Row (One-Time Event):**
+| title | date | time_start | time_end | price | description | image_url | ticket_link | instagram_link | active | sort |
+|---------------------|------------|------------|----------|----------|-------------------------------|----------------------|------|---------------|--------|------|
+| Grand Re-Opening | 2026-06-15 | 17:00 | | Free | Celebrate with live music! | grand-reopening.jpg | https://eventbrite.com/... | https://instagram.com/p/... | TRUE | |
 
 ## Adding Images
 
-Images need to be uploaded to Google Drive and then linked in your sheets.
+### For Event Posters
+
+Event images are stored directly in the website's code repository for better performance and reliability.
+
+**To add an event poster:**
+
+1. **Prepare your image:**
+   - Format: JPG or PNG
+   - Orientation: Portrait/vertical (standard poster ratio)
+   - Filename: Use lowercase with hyphens (e.g., `grand-reopening.jpg`, `trivia-night.jpg`)
+   - Size: Recommended max 1200px width
+
+2. **Send to your web developer:**
+   - Email or share the image file
+   - Let them know the filename you're using in the spreadsheet
+   - They will add it to the website repository
+
+3. **In your Events Google Sheet:**
+   - In the `image_url` column, enter **just the filename**: `grand-reopening.jpg`
+   - Do NOT use full URLs or Google Drive links for events
+
+**Important:** The filename in your spreadsheet must exactly match the filename your developer adds to the site (including `.jpg` or `.png` extension).
+
+### For Beer and Menu Images (Google Drive)
+
+### For Beer and Menu Images (Google Drive)
+
+For beer and menu item images, continue using Google Drive as before.
 
 ### Step 1: Upload Image to Google Drive
 
