@@ -313,6 +313,9 @@ img {
     text-transform: uppercase;
     border-bottom: 2px solid transparent;
     text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
     
     &:hover,
     &:focus {
@@ -320,8 +323,12 @@ img {
     }
     
     &.active {
-      color: $primary-color-dark;
-      border-bottom-color: $primary-color-dark;
+      color: #432f07;
+      border-bottom-color: #7A5C1F;
+      border-bottom-width: 3px;
+      background-color: rgba(165, 136, 93, 0.9);
+      font-weight: bold;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
   }
   
