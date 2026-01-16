@@ -44,7 +44,7 @@ permalink: /menu/
                 <img src="{{ beer.image_url }}" class="card-img-top" alt="{{ beer.name }}">
               {% endif %}
               <div class="card-body">
-                <h3 class="card-title h6">{{ beer.name }}</h3>
+                <h3 class="card-title">{{ beer.name }}</h3>
                 {% if beer.style %}
                   <p class="text-muted small mb-2">{{ beer.style }}</p>
                 {% endif %}
@@ -70,6 +70,13 @@ permalink: /menu/
                     {% if beer.bottle and beer.bottle != '' %}
                       <span class="badge bg-info">Bottles</span>
                     {% endif %}
+                  </div>
+                {% endif %}
+                {% if beer.untappd_link %}
+                  <div class="mt-3">
+                    <a href="{{ beer.untappd_link }}" class="hero-btn hero-btn-sm">
+                      <i class="fab fa-untappd" aria-hidden="true"></i> Rate it on Untappd
+                    </a>
                   </div>
                 {% endif %}
               </div>
