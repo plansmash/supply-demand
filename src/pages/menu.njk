@@ -11,7 +11,7 @@ permalink: /menu/
   <nav class="mb-5" aria-labelledby="menuSections">
     <h2 class="visually-hidden" id="menuSections">Menu sections</h2>
     <ul class="list-unstyled d-flex flex-wrap gap-3 mb-0">
-      <li><a href="#beers">Beers</a></li>
+      <li><a href="#beers" class="hero-btn hero-btn-sm">Beers</a></li>
       {% if menu.items.length > 0 %}
         {% set categories = [] %}
         {% for item in menu.items %}
@@ -21,7 +21,7 @@ permalink: /menu/
         {% endfor %}
         {% for category in categories %}
           {% if category %}
-            <li><a href="#{{ category | lower | replace(' ', '-') }}">{{ category }}</a></li>
+            <li><a href="#{{ category | lower | replace(' ', '-') }}" class="hero-btn hero-btn-sm">{{ category }}</a></li>
           {% endif %}
         {% endfor %}
       {% endif %}
