@@ -7,6 +7,13 @@ permalink: /events/
 <div class="container py-4">
   <h1 class="mb-4">Events at Supply & Demand</h1>
   
-  {% set showRecurring = true %}
-  {% set showUpcoming = true %}
-  {% include "components/events-list.njk" %}
+  {# Calendar view with date-grouped events #}
+  {% include "components/calendar.njk" %}
+  
+  <hr class="my-5" style="border-color: rgba(165, 136, 93, 0.3);">
+  
+  {# Recurring events section #}
+    {% set showRecurring = true %}
+    {% set showUpcoming = false %}
+    {% include "components/events-list.njk" %}
+</div>

@@ -270,6 +270,17 @@ main {
       min-height: 300px;
     }
   }
+
+  // Recurring pattern text
+  .recurring-pattern {
+    font-size: 0.9rem;
+    color: #a5885d;
+    margin: 0.5rem 0;
+
+    i {
+      margin-right: 0.25rem;
+    }
+  }
 }
 
 // Images
@@ -347,6 +358,240 @@ img {
     
     .nav-link {
       border-bottom: none;
+    }
+  }
+}
+
+// Calendar Styles
+.calendar-view {
+  margin-bottom: 3rem;
+  
+  .calendar-header {
+    margin-bottom: 1.5rem;
+    
+    h2 {
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+  }
+  
+  .calendar-table {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    
+    th {
+      background-color: rgba(0, 0, 0, 0.3);
+      color: #a5885d;
+      text-align: center;
+      padding: 0.75rem 0.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      border-bottom: 2px solid rgba(165, 136, 93, 0.3);
+    }
+    
+    td {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0;
+      height: 70px;
+      vertical-align: top;
+      
+      &.empty {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+    }
+    
+    .day-link {
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: 0.5rem;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      
+      &:hover,
+      &:focus {
+        background-color: rgba(165, 136, 93, 0.2);
+        outline: 2px solid #a5885d;
+        outline-offset: -2px;
+      }
+      
+      .day-number {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+      }
+      
+      .today-label {
+        display: block;
+        font-size: 0.75rem;
+        color: #a5885d;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
+    
+    .day-no-link {
+      display: block;
+      width: 100%;
+      height: 100%;
+      padding: 0.5rem;
+      color: rgba(255, 255, 255, 0.4);
+      
+      .day-number {
+        display: block;
+        font-weight: 400;
+      }
+      
+      .today-label {
+        display: block;
+        font-size: 0.75rem;
+        color: #a5885d;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
+    
+    .today {
+      .day-link,
+      .day-no-link {
+        background-color: rgba(165, 136, 93, 0.25);
+        
+        .day-number {
+          color: #a5885d;
+          font-weight: 700;
+        }
+      }
+    }
+    
+    // All events (both recurring and specific dates)
+    .has-events {      
+      .day-link {
+        font-weight: 700;
+        
+        .day-number {
+          color: #6496c8; // Blue for all events
+          font-size: 1.1em;
+        }
+      }
+    }
+    
+    // Today gets special gold highlight
+    .today {
+      background-color: rgba(165, 136, 93, 0.15);
+      
+      .day-link, .day-no-link {
+        font-weight: 700;
+        
+        .day-number {
+          color: #a5885d; // Gold for today
+          font-size: 1.1em;
+        }
+      }
+    }
+  }
+  
+  // Hide on mobile
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+
+// Date-grouped events list
+.events-by-date {
+  h2 {
+    color: white;
+  }
+  
+  .date-group {
+    margin-bottom: 2.5rem;
+  }
+  
+  .date-header {
+    color: #a5885d;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: 0.75rem 1rem;
+    background-color: rgba(165, 136, 93, 0.2);
+    border-left: 4px solid #a5885d;
+    margin-bottom: 1.5rem;
+    scroll-margin-top: 20px;
+  }
+  
+  .event-card-compact {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 1.5rem;
+    border-left: 3px solid #a5885d;
+    margin-bottom: 1rem;
+    
+    .event-image {
+      margin-bottom: 1rem;
+      
+      img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+    }
+    
+    .event-title {
+      color: white;
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    
+    .event-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.875rem;
+      
+      span {
+        color: #a5885d;
+        font-weight: 600;
+        
+        i {
+          margin-right: 0.25rem;
+        }
+      }
+    }
+    
+    .event-description {
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    
+    .event-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+  }
+  
+  // Desktop layout
+  @media (min-width: 768px) {
+    .event-card-compact {
+      display: flex;
+      gap: 1.5rem;
+      align-items: start;
+      
+      .event-image {
+        flex-shrink: 0;
+        width: 200px;
+        margin-bottom: 0;
+      }
+      
+      .event-content {
+        flex: 1;
+      }
     }
   }
 }
