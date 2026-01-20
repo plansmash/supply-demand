@@ -59,12 +59,13 @@ Required columns:
 
 #### Events Sheet
 Required columns:
-- `title` - Event name (e.g., "Trivia Night - Every Monday", "Grand Re-Opening Party")
+- `title` - Event name (e.g., "Trivia Night", "Grand Re-Opening Party")
 - `date` - Event date in YYYY-MM-DD format (e.g., "2026-06-15"). **Leave empty for recurring events** (like weekly trivia)
 - `time_start` - Event start time (e.g., "19:00" for 7:00 PM, "18:30" for 6:30 PM)
 - `time_end` - Optional event end time (e.g., "22:00" for 10:00 PM). Leave empty if no end time
 - `price` - Optional ticket price or cost (e.g., "10" for $10.00, "Free", "$5 cover")
 - `description` - Brief description of the event (includes all relevant information from the poster)
+- `recurring_pattern` - For recurring events, describe the pattern (e.g., "Every Monday", "Every Thursday", "3rd Wednesday of each month"). **Leave empty for one-time events**
 - `ticket_link` - Optional URL for tickets (e.g., Eventbrite link, ticket sales page)
 - `instagram_link` - Optional Instagram post URL for the event
 - `image_url` - Just the filename of the poster image (e.g., "grand-reopening.jpg")
@@ -76,7 +77,7 @@ Required columns:
 
 **Recurring Events (Weekly/Regular):**
 - Leave `date` column **empty**
-- Include pattern in `title` (e.g., "Trivia Night - Every Monday", "Wax Museum - Every Thursday")
+- Add pattern to `recurring_pattern` (e.g., "Every Monday", "Every Thursday")
 - These events always display first in the "Regular Events" section
 - Leave `sort` empty to display in table order, or use numbers to control order
 

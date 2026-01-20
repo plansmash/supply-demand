@@ -42,7 +42,9 @@ module.exports = function(eleventyConfig) {
   // Filters
   eleventyConfig.addFilter('formatDate', function(date) {
     if (!date) return '';
-    const d = new Date(date);
+    // Parse YYYY-MM-DD as local date to avoid timezone issues
+    const parts = date.split('-');
+    const d = new Date(parts[0], parts[1] - 1, parts[2]);
     return d.toLocaleDateString('en-US', { 
       weekday: 'long', 
       year: 'numeric', 

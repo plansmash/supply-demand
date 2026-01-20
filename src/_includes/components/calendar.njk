@@ -1,0 +1,38 @@
+{# Calendar component for displaying events #}
+{# JavaScript-powered dynamic calendar with month navigation #}
+
+{# Provide events data to JavaScript #}
+<script id="events-data" type="application/json">
+{{ events.items | dump | safe }}
+</script>
+
+{# Calendar view with navigation #}
+<div class="calendar-view">
+  <div class="calendar-header">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <button id="calendar-prev" class="hero-btn hero-btn-sm" aria-label="Previous month">
+        <i class="fas fa-chevron-left" aria-hidden="true"></i> Previous
+      </button>
+      <h2 class="h4 mb-0">January 2026</h2>
+      <button id="calendar-next" class="hero-btn hero-btn-sm" aria-label="Next month">
+        Next <i class="fas fa-chevron-right" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="text-center mb-3">
+      <button id="calendar-today" class="hero-btn hero-btn-sm">
+        <i class="fas fa-calendar-day" aria-hidden="true"></i> Today
+      </button>
+    </div>
+    <p class="text-white-50 small">Dates with events are highlighted. Click to view details below.</p>
+  </div>
+  
+  <div class="calendar-grid">
+    {# JavaScript will populate this #}
+  </div>
+</div>
+
+{# Date-grouped event list #}
+<div class="events-by-date">
+  <h2 class="h4 mb-4">Upcoming Events by Date</h2>
+  {# JavaScript will populate this #}
+</div>
