@@ -322,7 +322,7 @@ img {
     font-weight: 500;
     color: white;
     text-transform: uppercase;
-    border-bottom: 2px solid transparent;
+	border-bottom: 2px solid transparent;
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 4px;
@@ -345,7 +345,7 @@ img {
   
   // Desktop spacing and dividers
   @media (min-width: 992px) {
-    .nav-item:not(:first-child) .nav-link {
+    .nav-item:not(:first-child) {
       border-left: 1px solid rgba(255, 255, 255, 0.3);
       margin-left: 1rem;
       padding-left: 1rem;
