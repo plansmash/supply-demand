@@ -6,7 +6,7 @@ permalink: /location/
 
 <div class="row">
   <div class="col-md-6 mb-4">
-    <h2>Visit Us</h2>
+    <h2>Location</h2>
     <address>
       <strong>{{ site.name }}</strong><br>
       {{ site.address.street }}<br>
@@ -15,8 +15,10 @@ permalink: /location/
       <a href="mailto:{{ site.contact.email }}">{{ site.contact.email }}</a>
     </address>
     
-    <h3>Hours</h3>
-    {% set specialHoursHeadingLevel = "h4" %}
+    <h2>Hours</h2>
+    {% set taproomHoursHeadingLevel = "h3" %}
+    {% set kitchenHoursHeadingLevel = "h3" %}
+    {% set specialHoursHeadingLevel = "h3" %}
     {% include "components/hours.njk" %}
     
     <h3>Parking</h3>
@@ -41,11 +43,4 @@ permalink: /location/
       </a>
     </p>
   </div>
-</div>
-
-<div class="mt-4">
-  <p class="text-center">
-    <a href="/contact/" class="btn btn-primary">Contact Us</a>
-    <a href="/events/" class="btn btn-outline-primary">View Events</a>
-  </p>
 </div>

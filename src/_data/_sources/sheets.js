@@ -153,14 +153,24 @@ async function getHours() {
   }
 
   // Filter out rows with no day (empty rows) and inactive rows
-  const rawHours = result.data.filter(row => row.day && row.day.trim() && row.active);
+  // Note: CSV data comes as strings, so check for truthy values ('1', 'true', 'TRUE', 'yes', 'x', etc.)
+  const rawHours = result.data.filter(row => {
+    if (!row.day || !row.day.trim()) return false;
+    
+    // Check if active - handle string values from CSV
+    const activeValue = (row.active || '').toString().trim().toLowerCase();
+    const isActive = activeValue === '1' || activeValue === 'true' || 
+                     activeValue === 'yes' || activeValue === 'x';
+    
+    return isActive;
+  });
 
   // Transform to template-friendly format
   const hours = rawHours.map(row => {
     // Format hours display
     let hoursDisplay;
     if (row.label && row.label.trim()) {
-      // Use label if provided (e.g., "Closed", "Christmas Day – Closed")
+      // Use label if provided (e.g., "Closed")
       hoursDisplay = row.label;
     } else if (row.open && row.close) {
       // Convert 24h to 12h format
@@ -189,7 +199,7 @@ async function getHours() {
     return {
       day: dayDisplay,
       hours: hoursDisplay,
-      is_special: row.type === 'holiday',
+      type: row.type || 'regular',
       sort: parseInt(row.sort) || 0
     };
   });

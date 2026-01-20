@@ -3,33 +3,50 @@
     <p class="mb-0">{{ hours.error }}</p>
   </div>
 {% elif hours.items.length > 0 %}
-  {# Separate regular hours from special dates #}
-  {% set regularHours = [] %}
-  {% set specialDates = [] %}
+  {# Separate hours into three categories #}
+  {% set taproomHours = [] %}
+  {% set kitchenHours = [] %}
+  {% set specialHours = [] %}
   {% for entry in hours.items %}
-    {% if entry.is_special %}
-      {% set specialDates = (specialDates.push(entry), specialDates) %}
+    {% if entry.type === 'kitchen' %}
+      {% set kitchenHours = (kitchenHours.push(entry), kitchenHours) %}
+    {% elif entry.type === 'holiday' %}
+      {% set specialHours = (specialHours.push(entry), specialHours) %}
     {% else %}
-      {% set regularHours = (regularHours.push(entry), regularHours) %}
+      {% set taproomHours = (taproomHours.push(entry), taproomHours) %}
     {% endif %}
   {% endfor %}
   
-  {# Display regular hours #}
-  {% if regularHours.length > 0 %}
+  {# Display taproom hours #}
+  {% if taproomHours.length > 0 %}
+    {% set subHeadingLevel = taproomHoursHeadingLevel | default("h4") %}
+    <{{ subHeadingLevel }} class="h3">Taproom Hours</{{ subHeadingLevel }}>
     <dl class="row">
-      {% for entry in regularHours %}
+      {% for entry in taproomHours %}
         <dt class="col-sm-3">{{ entry.day }}</dt>
         <dd class="col-sm-9">{{ entry.hours }}</dd>
       {% endfor %}
     </dl>
   {% endif %}
   
-  {# Display special dates/holidays #}
-  {% if specialDates.length > 0 %}
-    {% set subHeadingLevel = specialHoursHeadingLevel | default("h4") %}
-    <{{ subHeadingLevel }} class="h6 mt-3">Special Hours</{{ subHeadingLevel }}>
+  {# Display kitchen hours #}
+  {% if kitchenHours.length > 0 %}
+    {% set subHeadingLevel = kitchenHoursHeadingLevel | default("h4") %}
+    <{{ subHeadingLevel }} class="h3 mt-3">Kitchen Hours</{{ subHeadingLevel }}>
     <dl class="row">
-      {% for entry in specialDates %}
+      {% for entry in kitchenHours %}
+        <dt class="col-sm-3">{{ entry.day }}</dt>
+        <dd class="col-sm-9">{{ entry.hours }}</dd>
+      {% endfor %}
+    </dl>
+  {% endif %}
+  
+  {# Display special hours (only if there are any) #}
+  {% if specialHours.length > 0 %}
+    {% set subHeadingLevel = specialHoursHeadingLevel | default("h4") %}
+    <{{ subHeadingLevel }} class="h3 mt-3">Special Hours</{{ subHeadingLevel }}>
+    <dl class="row">
+      {% for entry in specialHours %}
         <dt class="col-sm-3">{{ entry.day }}</dt>
         <dd class="col-sm-9">{{ entry.hours }}</dd>
       {% endfor %}
@@ -38,3 +55,4 @@
 {% else %}
   <p class="text-muted">Hours information coming soon.</p>
 {% endif %}
+<p>First come first served no reservations!</p>
