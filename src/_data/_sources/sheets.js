@@ -213,9 +213,55 @@ async function getHours() {
   };
 }
 
+/**
+ * Get ticker messages from Google Sheets
+ */
+async function getTicker() {
+  const sheetUrl = process.env.SHEET_URL_TICKER;
+  const result = await fetchSheetData(sheetUrl, 'ticker');
+
+  if (result.error) {
+    return {
+      items: [],
+      error: result.error,
+      lastUpdated: new Date().toISOString()
+    };
+  }
+
+  // Filter out rows with no message (empty rows) and inactive rows
+  const rawMessages = result.data.filter(row => {
+    if (!row.message || !row.message.trim()) return false;
+    
+    // Check if active - handle string values from CSV
+    const activeValue = (row.active || '').toString().trim().toLowerCase();
+    const isActive = activeValue === '1' || activeValue === 'true' || 
+                     activeValue === 'yes' || activeValue === 'x';
+    
+    return isActive;
+  });
+
+  // Transform to template-friendly format
+  const messages = rawMessages.map(row => ({
+    message: row.message.trim(),
+    sort: parseInt(row.sort) || 0
+  }));
+
+  // Sort messages by sort order
+  messages.sort((a, b) => a.sort - b.sort);
+
+  console.log(`✅ Loaded ${messages.length} ticker messages from Google Sheets`);
+
+  return {
+    items: messages,
+    error: null,
+    lastUpdated: new Date().toISOString()
+  };
+}
+
 module.exports = {
   getBeers,
   getMenu,
   getEvents,
-  getHours
+  getHours,
+  getTicker
 };

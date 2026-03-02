@@ -1,0 +1,74 @@
+{# News Ticker Component #}
+{% if ticker.error %}
+  {# Show fallback message if data source failed #}
+  <div class="ticker-error" role="alert">
+    <div class="container">
+      <p class="mb-0"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> {{ ticker.error }}</p>
+    </div>
+  </div>
+{% elif ticker.items and ticker.items.length > 0 %}
+  <div class="ticker-wrapper" role="complementary" aria-label="News ticker">
+    <div class="container-fluid">
+      <div class="ticker-container">
+        <div class="ticker-label" aria-hidden="true">
+          <i class="fas fa-bullhorn"></i>
+          <span>News</span>
+        </div>
+        <div class="ticker-content-wrapper">
+          <div class="ticker-content" id="tickerContent" aria-live="polite" aria-atomic="false">
+            {% for message in ticker.items %}
+              <span class="ticker-item">{{ message.message }}</span>
+              {% if not loop.last %}<span class="ticker-separator" aria-hidden="true">•</span>{% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <button 
+          type="button" 
+          class="ticker-control" 
+          id="tickerToggle"
+          aria-label="Pause ticker"
+          aria-pressed="false">
+          <i class="fas fa-pause" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const ticker = document.getElementById('tickerContent');
+      const toggleBtn = document.getElementById('tickerToggle');
+      if (!ticker || !toggleBtn) return;
+
+      let isPaused = false;
+
+      // Clone content for seamless loop with extra spacing between repeats
+      const tickerContent = ticker.innerHTML;
+      const spacer = '<span class="ticker-loop-spacer" aria-hidden="true">|</span>';
+      ticker.innerHTML = tickerContent + spacer + tickerContent;
+
+      // Toggle function
+      function toggleTicker() {
+        isPaused = !isPaused;
+        
+        if (isPaused) {
+          ticker.style.animationPlayState = 'paused';
+          toggleBtn.setAttribute('aria-label', 'Play ticker');
+          toggleBtn.setAttribute('aria-pressed', 'true');
+          toggleBtn.innerHTML = '<i class="fas fa-play" aria-hidden="true"></i>';
+        } else {
+          ticker.style.animationPlayState = 'running';
+          toggleBtn.setAttribute('aria-label', 'Pause ticker');
+          toggleBtn.setAttribute('aria-pressed', 'false');
+          toggleBtn.innerHTML = '<i class="fas fa-pause" aria-hidden="true"></i>';
+        }
+      }
+
+      // Toggle on button click
+      toggleBtn.addEventListener('click', toggleTicker);
+      
+      // Toggle on ticker click
+      ticker.addEventListener('click', toggleTicker);
+    })();
+  </script>
+{% endif %}

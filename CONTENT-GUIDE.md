@@ -13,10 +13,11 @@ This guide explains how to update the website content using Google Sheets and Go
 
 ## Overview
 
-The website pulls content from three Google Sheets:
+The website pulls content from four Google Sheets:
 - **Beer List** - All beers on tap
 - **Menu** - Food menu items (pizza, appetizers, etc.)
 - **Events** - Upcoming events
+- **Ticker** - News/announcements that scroll on the homepage
 
 Images are hosted on Google Drive and linked from the sheets.
 
@@ -137,9 +138,31 @@ Special dates/holidays (type = "holiday"):
 - Use `label` for closed days or special messages
 - Holiday dates should use YYYY-MM-DD format
 
+#### Ticker Sheet
+Required columns:
+- `message` - The news or announcement text to display (e.g., "Happy Hour 3-5 PM daily!", "New menu items available now!")
+- `active` - Set to "1", "true", "yes", or "x" to display, leave empty to hide
+- `sort` - Number to control display order (1, 2, 3, etc.). Lower numbers appear first.
+
+**Example:**
+| message | active | sort |
+|-------------------------------------------|--------|------|
+| Happy Hour 3-5 PM daily! | 1 | 1 |
+| New spring menu items available now! | 1 | 2 |
+| Trivia Night every Monday at 7 PM | 1 | 3 |
+| Holiday hours: Closed Dec 25-26 | | 4 |
+
+**Notes:**
+- Messages scroll continuously across the homepage
+- Only messages marked as active will display
+- Keep messages concise (under 100 characters recommended)
+- Multiple messages will scroll in the order specified by `sort`
+- A stop/play button allows visitors to pause the ticker
+- If no active messages exist, the ticker won't display
+
 ### Step 2: Publish Each Sheet as CSV
 
-For **each** of your four Google Sheets (Beer, Menu, Events, and Hours):
+For **each** of your four Google Sheets (Beer, Menu, Events, Hours, and Ticker):
 
 1. Open the Google Sheet
 2. Click **File** → **Share** → **Publish to web**
@@ -206,6 +229,28 @@ For **each** of your four Google Sheets (Beer, Menu, Events, and Hours):
 | title | date | time_start | time_end | price | description | image_url | ticket_link | instagram_link | active | sort |
 |---------------------|------------|------------|----------|----------|-------------------------------|----------------------|------|---------------|--------|------|
 | Grand Re-Opening | 2026-06-15 | 17:00 | | Free | Celebrate with live music! | grand-reopening.jpg | https://eventbrite.com/... | https://instagram.com/p/... | TRUE | |
+
+### Updating the Ticker
+
+1. Open your Ticker Google Sheet
+2. Add a new row for a new announcement, or edit an existing row
+3. Set `active` to "1" to show the message, or leave empty to hide
+4. Use the `sort` column to control the display order (lower numbers appear first)
+5. Save
+6. Trigger a rebuild
+
+**Example:**
+| message | active | sort |
+|-------------------------------------------|--------|------|
+| Happy Hour 3-5 PM daily! | 1 | 1 |
+| New spring menu items available now! | 1 | 2 |
+| Trivia Night every Monday at 7 PM | 1 | 3 |
+
+**Tips:**
+- Keep messages concise (under 100 characters is ideal)
+- Messages scroll continuously on the homepage
+- Visitors can pause the ticker with the stop/play button
+- To temporarily hide a message, remove the "1" from the `active` column
 
 ## Adding Images
 
