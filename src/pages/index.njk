@@ -1,5 +1,5 @@
 ---
-layout: base.njk
+layout: home.njk
 title: Home
 permalink: /
 ---
@@ -18,27 +18,13 @@ permalink: /
             <p class="hero-location">Find us at 420 Talbot St, Downtown London</p>
           </div>
           <div class="hero-cta mt-4">
-            <a href="/menu/" class="hero-btn">See the menu</a>
+            <a href="/menu/" class="hero-btn">Food & Beer</a>
             <a href="/location/" class="hero-btn">Find us</a>
-            <a href="/events/" class="hero-btn">Events at S&D</a>
+            <a href="/events/" class="hero-btn">Events</a>
+			<a href="/shop/" class="hero-btn">Shop</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-{# Events Section #}
-{% if events.items.length > 0 %}
-  <section class="container my-5">
-    <h2 class="mb-4">Upcoming Events</h2>
-    
-    {% set limit = 3 %}
-    {% set showRecurring = false %}
-    {% include "components/events-list.njk" %}
-    
-    <div class="text-center mt-4">
-      <a href="/events/" class="hero-btn">View All Events</a>
-    </div>
-  </section>
-{% endif %}
