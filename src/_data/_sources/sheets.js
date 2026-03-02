@@ -186,7 +186,7 @@ async function getHours() {
       hoursDisplay = 'Closed';
     }
 
-    // Format day display for special dates
+    // Format day display for special dates and abbreviate regular days
     let dayDisplay = row.day;
     if (row.type === 'holiday' && row.day.match(/^\d{4}-\d{2}-\d{2}$/)) {
       // Parse YYYY-MM-DD date and format as "Dec 25"
@@ -194,6 +194,21 @@ async function getHours() {
       const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
                          'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
       dayDisplay = `${monthNames[date.getMonth()]} ${date.getDate()}`;
+    } else {
+      // Abbreviate regular day names
+      const dayAbbreviations = {
+        'monday': 'Mon',
+        'tuesday': 'Tue',
+        'wednesday': 'Wed',
+        'thursday': 'Thu',
+        'friday': 'Fri',
+        'saturday': 'Sat',
+        'sunday': 'Sun'
+      };
+      const dayLower = dayDisplay.toLowerCase();
+      if (dayAbbreviations[dayLower]) {
+        dayDisplay = dayAbbreviations[dayLower];
+      }
     }
 
     return {

@@ -19,8 +19,10 @@
   
   {# Display taproom hours #}
   {% if taproomHours.length > 0 %}
-    {% set subHeadingLevel = taproomHoursHeadingLevel | default("h4") %}
-    <{{ subHeadingLevel }} class="h3">Taproom Hours</{{ subHeadingLevel }}>
+    {% if showHoursHeadings !== false %}
+      {% set subHeadingLevel = taproomHoursHeadingLevel | default("h4") %}
+      <{{ subHeadingLevel }} class="h3">Taproom Hours</{{ subHeadingLevel }}>
+    {% endif %}
     <dl class="row">
       {% for entry in taproomHours %}
         <dt class="col-sm-3">{{ entry.day }}</dt>
@@ -29,10 +31,12 @@
     </dl>
   {% endif %}
   
-  {# Display kitchen hours #}
-  {% if kitchenHours.length > 0 %}
-    {% set subHeadingLevel = kitchenHoursHeadingLevel | default("h4") %}
-    <{{ subHeadingLevel }} class="h3 mt-3">Kitchen Hours</{{ subHeadingLevel }}>
+  {# Display kitchen hours (unless showOnlyRegularHours is set) #}
+  {% if kitchenHours.length > 0 and showOnlyRegularHours !== true %}
+    {% if showHoursHeadings !== false %}
+      {% set subHeadingLevel = kitchenHoursHeadingLevel | default("h4") %}
+      <{{ subHeadingLevel }} class="h3 mt-3">Kitchen Hours</{{ subHeadingLevel }}>
+    {% endif %}
     <dl class="row">
       {% for entry in kitchenHours %}
         <dt class="col-sm-3">{{ entry.day }}</dt>
@@ -41,10 +45,12 @@
     </dl>
   {% endif %}
   
-  {# Display special hours (only if there are any) #}
-  {% if specialHours.length > 0 %}
-    {% set subHeadingLevel = specialHoursHeadingLevel | default("h4") %}
-    <{{ subHeadingLevel }} class="h3 mt-3">Special Hours</{{ subHeadingLevel }}>
+  {# Display special hours (unless showOnlyRegularHours is set) #}
+  {% if specialHours.length > 0 and showOnlyRegularHours !== true %}
+    {% if showHoursHeadings !== false %}
+      {% set subHeadingLevel = specialHoursHeadingLevel | default("h4") %}
+      <{{ subHeadingLevel }} class="h3 mt-3">Special Hours</{{ subHeadingLevel }}>
+    {% endif %}
     <dl class="row">
       {% for entry in specialHours %}
         <dt class="col-sm-3">{{ entry.day }}</dt>
@@ -55,4 +61,6 @@
 {% else %}
   <p class="text-muted">Hours information coming soon.</p>
 {% endif %}
-<p>First come first served no reservations!</p>
+{% if showOnlyRegularHours !== true %}
+  <p>First come first served no reservations!</p>
+{% endif %}
